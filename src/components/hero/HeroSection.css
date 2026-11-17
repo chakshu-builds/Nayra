@@ -1,0 +1,437 @@
+/* ===== NAYRA Luxury Cinematic Scroll Storytelling Hero Styles ===== */
+
+.hero-scroll-wrapper {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--color-midnight);
+  overflow: hidden;
+}
+
+/* ─── Pinned Full-Viewport Stage (100vw × 100vh) ─── */
+.hero-landscape-stage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100svh;
+  max-width: none;
+  background: var(--color-midnight);
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  display: block;
+  box-sizing: border-box;
+}
+
+/* ─── Full-Screen Canvas: True Edge-to-Edge Layer ─── */
+.hero-landscape-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-luxury);
+  pointer-events: none;
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.hero-landscape-canvas--visible {
+  opacity: 1;
+}
+
+/* ─── Seamless Soft Edge Blending Vignettes ─── */
+.hero-edge-vignette-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(11, 11, 15, 0.6) 0%, transparent 100%);
+}
+
+.hero-edge-vignette-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(0deg, var(--color-midnight) 0%, transparent 100%);
+}
+
+/* Subtle Ambient Violet/Purple Lighting */
+.hero-ambient-purple-glow {
+  position: absolute;
+  top: 50%;
+  right: 25%;
+  transform: translate(50%, -50%);
+  width: 600px;
+  height: 450px;
+  background: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
+  z-index: 1;
+  pointer-events: none;
+  filter: blur(60px);
+}
+
+/* ─── Loading Pill Indicator ─── */
+.hero-loader-pill {
+  position: absolute;
+  top: 96px;
+  right: 36px;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 18px;
+  background: rgba(18, 18, 24, 0.85);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 100px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.hero-loader-brand {
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--color-soft-white);
+}
+
+.brand-dot {
+  color: var(--color-royal-purple);
+}
+
+.hero-loader-track {
+  width: 50px;
+  height: 2px;
+  background: rgba(139, 92, 246, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.hero-loader-bar {
+  height: 100%;
+  background: var(--color-royal-purple);
+  transition: width 0.2s ease-out;
+}
+
+.hero-loader-pct {
+  font-family: var(--font-heading);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--color-lavender);
+}
+
+/* ─── Scroll Cue (Bottom Center) ─── */
+.hero-scroll-cue {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 12;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.scroll-cue-line {
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--color-royal-purple);
+  opacity: 0.6;
+}
+
+.scroll-cue-text {
+  font-family: var(--font-heading);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  color: var(--color-dim-text);
+  text-transform: uppercase;
+}
+
+/* =========================================================================
+   CINEMATIC SCROLL STORYTELLING OVERLAYS (Sora & Inter Hierarchy)
+   ========================================================================= */
+
+.hero-story-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+  overflow: hidden;
+}
+
+/* Base Story Block Styles */
+.story-block {
+  position: absolute;
+  pointer-events: none;
+  box-sizing: border-box;
+  will-change: opacity, transform;
+}
+
+/* ─── Eyebrow Labels: 11–12px uppercase with controlled letter-spacing ─── */
+.story-eyebrow {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: clamp(0.6875rem, 0.85vw, 0.75rem); /* 11–12px */
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--color-royal-purple);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  text-shadow: 0 0 16px rgba(139, 92, 246, 0.35);
+  will-change: opacity, transform;
+}
+
+/* ─── Feature Headings: 52–64px desktop, weight 500–600, line-height 1.05 ─── */
+.story-headline {
+  font-family: var(--font-heading);
+  font-size: clamp(2.35rem, 4.2vw, 3.75rem); /* 52–64px */
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  color: #FFFFFF;
+  margin: 0 0 18px 0;
+  text-shadow: 0 4px 28px rgba(11, 11, 15, 0.95);
+  will-change: opacity, transform;
+}
+
+/* ─── Descriptions: 17–18px, Inter weight 300, Lavender Silver ─── */
+.story-description {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.2vw, 1.125rem); /* 17–18px */
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--color-lavender);
+  margin: 0;
+  text-shadow: 0 2px 14px rgba(11, 11, 15, 0.9);
+  will-change: opacity, transform;
+}
+
+/* ─── 1. Opening: Two-Level Composition at Optical Center ─── */
+.story-opening {
+  top: 48%; /* Optical center of viewport */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+  max-width: 900px;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.story-opening__intro {
+  font-family: var(--font-heading);
+  font-size: clamp(0.6875rem, 0.9vw, 0.8125rem); /* 11–13px */
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: var(--color-royal-purple);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  text-shadow: 0 0 14px rgba(139, 92, 246, 0.45);
+}
+
+.story-opening__brand {
+  font-family: var(--font-heading);
+  font-size: clamp(3.25rem, 7vw, 5.5rem); /* NAYRA centerpiece */
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+  line-height: 1.05;
+  margin: 0;
+  text-shadow: 0 0 40px rgba(11, 11, 15, 0.9), 0 0 24px rgba(139, 92, 246, 0.25);
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.story-opening__cursor {
+  display: inline-block;
+  color: var(--color-royal-purple);
+  font-weight: 300;
+  margin-left: 6px;
+  animation: heroCursorBlink 1.06s infinite;
+  text-shadow: 0 0 14px rgba(139, 92, 246, 0.85);
+}
+
+@keyframes heroCursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.story-opening__cursor--on {
+  opacity: 1;
+}
+
+/* ─── 2. Camera Section (Left-Side Negative Space) ─── */
+.story-camera {
+  top: 50%;
+  left: clamp(32px, 7.5vw, 130px);
+  transform: translateY(-50%);
+  max-width: 440px;
+  text-align: left;
+}
+
+.story-camera .story-description {
+  max-width: 420px;
+}
+
+/* ─── 3. Modular Architecture (Right-Side Negative Space) ─── */
+.story-modular {
+  top: 50%;
+  right: clamp(32px, 7.5vw, 130px);
+  transform: translateY(-50%);
+  max-width: 440px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.story-modular .story-description {
+  max-width: 420px;
+}
+
+/* ─── 4. Final Complete Product Reveal (Top-Center) ─── */
+.story-final {
+  top: clamp(18%, 23vh, 27%);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+  max-width: 960px;
+  padding: 0 24px;
+}
+
+.story-final__wordmark-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 3.5vw, 36px);
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.story-final__line {
+  flex: 1;
+  max-width: clamp(35px, 8vw, 85px);
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.75));
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.55);
+}
+
+.story-final__line--right {
+  background: linear-gradient(90deg, rgba(139, 92, 246, 0.75), transparent);
+}
+
+.story-final__brand {
+  font-family: var(--font-heading);
+  font-size: clamp(2.75rem, 6.5vw, 5rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #FFFFFF;
+  line-height: 1;
+  margin: 0;
+  text-transform: uppercase;
+  text-shadow: 0 0 35px rgba(139, 92, 246, 0.4), 0 4px 20px rgba(0, 0, 0, 0.85);
+}
+
+.story-final__accent {
+  background: linear-gradient(135deg, #E0D7FE 0%, #A855F7 50%, #7C3AED 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  filter: drop-shadow(0 0 18px rgba(139, 92, 246, 0.85));
+}
+
+.story-final__tagline {
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 2.2vw, 1.85rem);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--color-soft-white);
+  margin: 0 0 8px 0;
+  text-shadow: 0 2px 18px rgba(11, 11, 15, 0.95);
+}
+
+.story-final__subtext {
+  font-family: var(--font-body);
+  font-size: clamp(0.9375rem, 1.2vw, 1.0625rem);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: var(--color-lavender);
+  margin: 0;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
+}
+
+/* ─── Responsive Media Queries ─── */
+@media (max-width: 960px) {
+  .story-camera,
+  .story-modular {
+    max-width: 380px;
+  }
+}
+
+@media (max-width: 640px) {
+  .story-camera {
+    left: 24px;
+    right: 24px;
+    top: auto;
+    bottom: 84px;
+    transform: none;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .story-camera .story-description {
+    max-width: 100%;
+  }
+
+  .story-modular {
+    left: 24px;
+    right: 24px;
+    top: auto;
+    bottom: 84px;
+    transform: none;
+    max-width: 100%;
+    text-align: center;
+    align-items: center;
+  }
+
+  .story-modular .story-description {
+    max-width: 100%;
+  }
+
+  .story-final {
+    top: 22%;
+  }
+
+  .hero-loader-pill {
+    top: 90px;
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  .hero-scroll-cue {
+    bottom: 24px;
+  }
+}
