@@ -1,10 +1,8 @@
 /* ==========================================================================
-   NAYRA — AI ASSISTANT SHOWCASE SECTION
-   Visual Direction:
-     - Full-width cinematic dark black backdrop (#0B0B0F / #08070C)
-     - Royal-purple accents (#8B5CF6, #A78BFA, #C4B5FD)
-     - Left 55–60%: AI Assistant info & 2-column voice commands
-     - Right 40–45%: Seamless glasses image area (no placeholder boxes)
+   NAYRA — AI-POWERED ASSISTIVE SMART GLASSES SECTION
+   Clean, simple, and uncluttered split layout:
+     - Left: NAYRA assistive info, voice prompts, architecture & dev note
+     - Right: Blank/open space reserved for specs image (clean placeholder slot)
    ========================================================================== */
 
 .nayra-assistant-section {
@@ -12,309 +10,397 @@
   width: 100%;
   background-color: var(--color-midnight, #0B0B0F);
   color: var(--color-soft-white, #F4F7FA);
-  padding: clamp(80px, 9vw, 140px) 0;
-  overflow: hidden;
+  padding: clamp(64px, 7vw, 108px) 0;
   border-top: 1px solid rgba(139, 92, 246, 0.1);
   box-sizing: border-box;
 }
 
 .nayra-assistant-container {
   width: 100%;
-  max-width: var(--container-max-w, 1360px);
+  max-width: 1360px;
   margin: 0 auto;
   padding: 0 clamp(20px, 4vw, 56px);
   box-sizing: border-box;
 }
 
-/* ─── Asymmetric 2-Column Showcase Layout (58% Left / 42% Right) ─── */
+/* ─── Responsive Split Layout ─── */
 .nayra-assistant-grid {
   display: grid;
-  grid-template-columns: 1.38fr 1fr;
-  gap: clamp(36px, 5vw, 72px);
-  align-items: center;
+  grid-template-columns: 1.35fr 1fr;
+  gap: clamp(36px, 4.5vw, 64px);
+  align-items: start;
   width: 100%;
   box-sizing: border-box;
 }
 
-/* ─── LEFT: AI Assistant Information ─── */
-.nayra-assistant-info {
+/* ══════════════════════════════════════════════════════════════════
+   LEFT: Content & Technical Information
+   ══════════════════════════════════════════════════════════════════ */
+.nayra-assistant-left {
   display: flex;
   flex-direction: column;
-  gap: clamp(32px, 4vw, 48px);
-  max-width: 720px;
+  gap: clamp(28px, 3.5vw, 40px);
+  width: 100%;
 }
 
-.assistant-header-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.assistant-eyebrow {
-  display: inline-block;
-  font-family: var(--font-heading, 'Syne', sans-serif);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #A78BFA;
-  margin-bottom: 14px;
-}
-
-.assistant-heading {
-  font-family: var(--font-heading, 'Syne', sans-serif);
-  font-size: clamp(2.35rem, 4.4vw, 3.85rem);
-  font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.03em;
-  color: #FFFFFF;
-  margin: 0 0 18px 0;
-}
-
-.assistant-highlight {
-  display: inline-block;
-  background: linear-gradient(135deg, #E9D5FF 0%, #A78BFA 55%, #8B5CF6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.assistant-desc {
-  font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
-  font-size: clamp(1rem, 1.25vw, 1.15rem);
-  font-weight: 300;
-  line-height: 1.68;
-  color: rgba(244, 247, 250, 0.72);
-  margin: 0;
-  max-width: 600px;
-}
-
-/* ─── Voice Interaction Zone ─── */
-.assistant-commands-zone {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding-top: 8px;
-}
-
-.assistant-commands-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-/* Subtle Animated Acoustic Sound Bars */
-.assistant-sound-cue {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  height: 18px;
-}
-
-.cue-bar {
-  width: 2.5px;
-  background-color: #8B5CF6;
-  border-radius: 2px;
-  animation: cueWave 1.4s infinite ease-in-out;
-}
-
-.cue-bar.bar-1 {
-  height: 8px;
-  animation-delay: 0s;
-}
-
-.cue-bar.bar-2 {
-  height: 14px;
-  animation-delay: 0.2s;
-}
-
-.cue-bar.bar-3 {
-  height: 18px;
-  animation-delay: 0.4s;
-}
-
-@keyframes cueWave {
-  0%, 100% {
-    transform: scaleY(0.5);
-    opacity: 0.6;
-  }
-  50% {
-    transform: scaleY(1);
-    opacity: 1;
-  }
-}
-
-.assistant-voice-title {
-  font-family: var(--font-heading, 'Syne', sans-serif);
-  font-size: clamp(1.2rem, 1.7vw, 1.45rem);
-  font-weight: 600;
-  letter-spacing: -0.015em;
-  color: #FFFFFF;
-  margin: 0;
-}
-
-.assistant-voice-accent {
-  color: #C4B5FD;
-}
-
-/* ─── Two Clean Columns Separated by a Subtle Divider ─── */
-.assistant-columns-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  gap: clamp(16px, 2.5vw, 32px);
-  padding: 8px 0;
-}
-
-.assistant-column {
-  flex: 1 1 50%;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.assistant-column-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 4px;
-}
-
-.assistant-col-tag {
-  font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #A78BFA;
-}
-
-.assistant-column-divider {
-  width: 1px;
-  background: rgba(139, 92, 246, 0.2);
-  align-self: stretch;
-  flex-shrink: 0;
-}
-
-.assistant-command-list {
+/* ─── Header: Title & Core Idea ─── */
+.assistant-header {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* Individual Command Item (Minimal, Product-Focused) */
-.assistant-command-item {
+.assistant-badge {
+  display: inline-block;
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #A78BFA;
+}
+
+.assistant-title {
+  font-family: var(--font-heading, system-ui, sans-serif);
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.assistant-core-idea {
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: clamp(1rem, 1.25vw, 1.125rem);
+  line-height: 1.65;
+  color: #CBD5E1;
+  margin: 4px 0 0 0;
+  max-width: 680px;
+}
+
+/* ─── Section Blocks ─── */
+.assistant-block {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.assistant-block-title {
+  font-family: var(--font-heading, system-ui, sans-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+/* ─── Voice Prompts ─── */
+.voice-prompts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  width: 100%;
+}
+
+.voice-prompt-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 16px 18px;
+}
+
+.wake-word-tag {
+  font-family: var(--font-heading, system-ui, sans-serif);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #C4B5FD;
+  letter-spacing: -0.01em;
+}
+
+.prompt-items-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.prompt-item {
   display: flex;
   align-items: flex-start;
-  gap: 8px;
-  padding: 12px 16px;
-  background-color: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 12px;
-  transition: all 0.25s ease;
+  gap: 6px;
 }
 
-.assistant-command-item:hover {
-  background-color: rgba(139, 92, 246, 0.08);
-  border-color: rgba(139, 92, 246, 0.25);
-  transform: translateX(4px);
-}
-
-.command-quote-mark {
+.prompt-quote {
   font-family: Georgia, serif;
-  font-size: 1.15rem;
-  font-weight: 700;
+  font-size: 1.1rem;
   line-height: 1;
   color: #8B5CF6;
   flex-shrink: 0;
   margin-top: 1px;
 }
 
-.command-text {
-  font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
-  font-size: clamp(0.8125rem, 1vw, 0.885rem);
-  font-weight: 400;
-  line-height: 1.45;
-  color: #F1F5F9;
-  margin: 0;
-  letter-spacing: -0.005em;
+.prompt-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
-/* ─── RIGHT: Glasses Image Area (Direct Background Blend) ─── */
-.nayra-assistant-visual {
+.prompt-query {
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.45;
+  color: #F1F5F9;
+}
+
+.prompt-context {
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: #94A3B8;
+}
+
+/* ─── Current Technical Architecture & Status ─── */
+.architecture-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
   width: 100%;
-  height: 100%;
-  min-height: 440px;
+}
+
+.arch-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+
+.arch-code {
+  font-family: monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #8B5CF6;
+  flex-shrink: 0;
+}
+
+.arch-name {
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #E2E8F0;
+  flex: 1;
+}
+
+.arch-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 0.685rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.arch-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+.status--developed {
+  background-color: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: #34D399;
+}
+.status--developed .arch-dot {
+  background-color: #10B981;
+}
+
+.status--implemented {
+  background-color: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.28);
+  color: #C4B5FD;
+}
+.status--implemented .arch-dot {
+  background-color: #A855F7;
+}
+
+.status--pending {
+  background-color: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  color: #FBBF24;
+}
+.status--pending .arch-dot {
+  background-color: #F59E0B;
+}
+
+/* ─── Dev & Hardware Note ─── */
+.dev-hardware-note {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 18px;
+  background-color: rgba(139, 92, 246, 0.04);
+  border: 1px solid rgba(139, 92, 246, 0.18);
+  border-radius: 12px;
+}
+
+.note-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #C4B5FD;
+}
+
+.note-text {
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: #CBD5E1;
+  margin: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   RIGHT: Blank/Open Space Reserved for Specs Image
+   ══════════════════════════════════════════════════════════════════ */
+.nayra-assistant-right {
+  width: 100%;
+  position: sticky;
+  top: 96px;
+}
+
+.specs-image-slot {
+  width: 100%;
+  min-height: 480px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  border: none;
+  background-color: rgba(255, 255, 255, 0.015);
+  border: 1px dashed rgba(139, 92, 246, 0.25);
+  border-radius: 20px;
+  padding: 24px;
   box-sizing: border-box;
 }
 
-.assistant-glasses-img {
+.specs-rendered-img {
   width: 100%;
-  max-width: 520px;
-  max-height: 520px;
+  max-width: 480px;
+  max-height: 440px;
   object-fit: contain;
   display: block;
-  filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.85));
+}
+
+/* Clean Placeholder Slot Ready to Drop Image Asset Into Later */
+.specs-slot-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px 20px;
+}
+
+.placeholder-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.placeholder-icon-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: rgba(139, 92, 246, 0.08);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #A78BFA;
+  margin-bottom: 4px;
+}
+
+.placeholder-title {
+  font-family: var(--font-heading, system-ui, sans-serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #E2E8F0;
+  letter-spacing: -0.01em;
+}
+
+.placeholder-desc {
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 0.785rem;
+  color: #94A3B8;
+  max-width: 260px;
+  line-height: 1.45;
 }
 
 /* ─── Responsive Breakpoints ─── */
 
-/* Tablet (<= 1024px) */
-@media (max-width: 1024px) {
+/* Tablet (<= 1080px) */
+@media (max-width: 1080px) {
   .nayra-assistant-grid {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 40px;
   }
 
-  .nayra-assistant-info {
-    max-width: 100%;
+  .nayra-assistant-right {
+    position: static;
   }
 
-  .nayra-assistant-visual {
-    min-height: 320px;
+  .specs-image-slot {
+    min-height: 300px;
   }
 }
 
 /* Mobile (<= 768px) */
 @media (max-width: 768px) {
   .nayra-assistant-section {
-    padding: clamp(56px, 8vw, 80px) 0;
+    padding: clamp(48px, 7vw, 72px) 0;
   }
 
-  .assistant-heading {
-    font-size: clamp(2rem, 7vw, 2.75rem);
+  .assistant-title {
+    font-size: clamp(1.75rem, 6vw, 2.25rem);
   }
 
-  .assistant-columns-wrapper {
-    flex-direction: column;
-    gap: 20px;
+  .voice-prompts-grid {
+    grid-template-columns: 1fr;
   }
 
-  .assistant-column-divider {
-    width: 100%;
-    height: 1px;
-    background: rgba(139, 92, 246, 0.16);
+  .architecture-grid {
+    grid-template-columns: 1fr;
   }
 
-  .nayra-assistant-visual {
-    min-height: 240px;
+  .specs-image-slot {
+    min-height: 220px;
+    padding: 16px;
   }
 }
 
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
-  .cue-bar {
+  .nayra-assistant-left * {
     animation: none;
-  }
-
-  .assistant-command-item {
     transition: none;
-  }
-
-  .assistant-command-item:hover {
-    transform: none;
   }
 }
