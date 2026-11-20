@@ -1,0 +1,43 @@
+<svg width="400" height="340" viewBox="0 0 400 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="lensReflect" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#C4B5FD" stop-opacity="0.8"/>
+      <stop offset="25%" stop-color="#7C3AED" stop-opacity="0.6"/>
+      <stop offset="70%" stop-color="#1E1B4B" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#090710" stop-opacity="1"/>
+    </radialGradient>
+    <linearGradient id="metalBezel" x1="120" y1="80" x2="280" y2="240" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="35%" stop-color="#DDD6FE"/>
+      <stop offset="70%" stop-color="#6B21A8"/>
+      <stop offset="100%" stop-color="#1E1B4B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ambient Shadow & Glow -->
+  <circle cx="200" cy="170" r="110" fill="#7C3AED" fill-opacity="0.08"/>
+
+  <!-- Outer Glass Housing Rim -->
+  <rect x="90" y="70" width="220" height="200" rx="40" fill="#FFFFFF" fill-opacity="0.75" stroke="#E9D5FF" stroke-width="2"/>
+
+  <!-- Left Camera Sensor -->
+  <g transform="translate(150, 170)">
+    <circle cx="0" cy="0" r="42" fill="url(#metalBezel)" stroke="#FFFFFF" stroke-width="2"/>
+    <circle cx="0" cy="0" r="34" fill="url(#lensReflect)"/>
+    <circle cx="0" cy="0" r="16" fill="#090710" stroke="#A78BFA" stroke-width="1"/>
+    <!-- Specular Flare -->
+    <ellipse cx="-10" cy="-10" rx="8" ry="4" transform="rotate(-30 -10 -10)" fill="#FFFFFF" fill-opacity="0.65"/>
+  </g>
+
+  <!-- Right Camera Sensor -->
+  <g transform="translate(250, 170)">
+    <circle cx="0" cy="0" r="42" fill="url(#metalBezel)" stroke="#FFFFFF" stroke-width="2"/>
+    <circle cx="0" cy="0" r="34" fill="url(#lensReflect)"/>
+    <circle cx="0" cy="0" r="16" fill="#090710" stroke="#A78BFA" stroke-width="1"/>
+    <!-- Specular Flare -->
+    <ellipse cx="-10" cy="-10" rx="8" ry="4" transform="rotate(-30 -10 -10)" fill="#FFFFFF" fill-opacity="0.65"/>
+  </g>
+
+  <!-- Micro Vision Text -->
+  <text x="200" y="245" text-anchor="middle" font-family="'Inter', sans-serif" font-size="8.5" font-weight="600" letter-spacing="0.18em" fill="#7C3AED">DUAL FOVEAL PERCEPTION</text>
+</svg>

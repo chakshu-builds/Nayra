@@ -6,7 +6,8 @@ import Footer from './components/layout/Footer'
 import HeroSection from './components/hero/HeroSection'
 import ImpactSection from './components/sections/impact/ImpactSection'
 import VisionSection from './components/sections/VisionSection'
-import MeetNayraSection from './components/sections/MeetNayraSection'
+import NayraBentoSection from './components/sections/bento/NayraBentoSection'
+import NayraAssistantSection from './components/sections/assistant/NayraAssistantSection'
 import AccessibilitySection from './components/sections/AccessibilitySection'
 import TechnologySection from './components/sections/TechnologySection'
 import FinalCtaSection from './components/sections/FinalCtaSection'
@@ -30,6 +31,8 @@ export default function App() {
     })
 
     lenisRef.current = lenis
+    ;(window as any).__lenis = lenis
+    ;(window as any).ScrollTrigger = ScrollTrigger
 
     // Sync Lenis with GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update)
@@ -55,7 +58,8 @@ export default function App() {
         <HeroSection />
         <ImpactSection />
         <VisionSection />
-        <MeetNayraSection />
+        <NayraBentoSection id="meet-nayra" />
+        <NayraAssistantSection id="ai-assistant" />
         <AccessibilitySection />
         <TechnologySection />
         <FinalCtaSection />
