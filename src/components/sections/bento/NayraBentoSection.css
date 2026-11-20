@@ -1,10 +1,11 @@
 /* ==========================================================================
-   NAYRA — 5-CARD BENTO GRID SECTION (NO NESTED BOXES — MONOLITHIC CARDS)
+   NAYRA — 5-CARD BENTO GRID SECTION (ASYMMETRIC GRID WITH FULL-WIDTH BANNER)
    Geometry:
      - Exactly 5 cards
-     - Left card ~40% width, spanning both rows
-     - Top right wide horizontal card ~60% width (Row 1)
-     - Three equally sized vertical cards below top-right card (Row 2)
+     - Left hero card (~40% width, spanning rows 1 & 2)
+     - Top right card: Dual Cameras (~60% width horizontal card spanning columns 2 & 3 in Row 1)
+     - Two equal cards below it: Open-Ear Audio & Power Architecture (equal columns in Row 2)
+     - Bottom full-width banner card: Powered by Rockchip RV1106 (100% width, Row 3)
      - Consistent 16px gaps, 30px rounded corners, overflow: hidden
      - Precise edge alignment across rows and columns
    Styling:
@@ -67,11 +68,11 @@
   max-width: 600px;
 }
 
-/* ─── Exact Asymmetric 5-Card Bento Grid (40% Left / 60% Right) ─── */
+/* ─── Asymmetric 5-Card Bento Grid (40% Left / 60% Right Top + Full-Width Bottom) ─── */
 .nayra-bento-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  grid-template-rows: 290px 370px;
+  grid-template-columns: 4fr 3fr 3fr;
+  grid-template-rows: 280px 340px 240px;
   gap: 16px;
   align-items: stretch;
   width: 100%;
@@ -91,7 +92,7 @@
   box-sizing: border-box;
 }
 
-/* ─── CARD 1: Large Left Card (~40% Width, Spanning Both Rows) ─── */
+/* ─── CARD 1: Large Left Hero Card (~40% Width, Spanning Rows 1 & 2) ─── */
 .bento-item--glasses {
   grid-column: 1 / 2;
   grid-row: 1 / 3;
@@ -185,83 +186,50 @@
   letter-spacing: -0.01em;
 }
 
-/* ─── CARD 2: Wide Horizontal Card on Top Right (~60% Width, Row 1) ─── */
-.bento-item--chip {
-  grid-column: 2 / 5;
+/* ─── CARD 2: Dual Cameras (Top-Right Slot — Wide Horizontal Card Spanning Top Right) ─── */
+.bento-item--camera {
+  grid-column: 2 / 4;
   grid-row: 1 / 2;
-  background-color: #120E1E;
-  color: #FFFFFF;
-  border: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: row;
-  align-items: stretch;
+  align-items: center;
   justify-content: space-between;
   padding: 0;
+  background-color: #FFFFFF;
+  overflow: hidden;
 }
 
-.bento-chip-content {
+.bento-item--camera .bento-component-header {
   flex: 1 1 54%;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
+  padding: clamp(24px, 2.6vw, 34px);
   gap: 10px;
-  padding: 28px 34px;
   z-index: 2;
 }
 
-.bento-chip-title {
+.bento-item--camera .bento-component-title {
   font-family: var(--font-heading);
-  font-size: clamp(1.4rem, 1.9vw, 1.85rem);
+  font-size: clamp(1.35rem, 1.8vw, 1.65rem);
   font-weight: 700;
-  line-height: 1.18;
-  letter-spacing: -0.02em;
-  color: #FFFFFF;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: #0B0A12;
   margin: 0;
 }
 
-.bento-chip-desc {
+.bento-item--camera .bento-component-desc {
   font-family: var(--font-body);
-  font-size: 0.85rem;
-  color: #94A3B8;
-  line-height: 1.48;
+  font-size: 0.875rem;
+  color: #64748B;
+  line-height: 1.45;
   margin: 0;
-  max-width: 440px;
+  max-width: 320px;
 }
 
-.bento-chip-tags {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  margin-top: 4px;
-}
-
-.chip-tag-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 5px 14px;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 9999px;
-  font-family: var(--font-body);
-  font-size: 0.76rem;
-  font-weight: 500;
-  color: #E2E8F0;
-  letter-spacing: -0.01em;
-}
-
-.chip-tag-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #A855F7;
-  display: inline-block;
-  box-shadow: 0 0 6px rgba(168, 85, 247, 0.6);
-}
-
-/* Right: Directly integrated processor media (NO nested box, NO background fill, NO borders) */
-.bento-chip-media {
+.bento-item--camera .bento-component-media {
   flex: 1 1 46%;
   width: 100%;
   height: 100%;
@@ -269,28 +237,44 @@
   align-items: center;
   justify-content: center;
   background: transparent;
+  padding: 16px 28px;
+  margin-top: 0;
+  min-height: unset;
   overflow: hidden;
 }
 
-.bento-chip-img {
+.bento-item--camera .bento-component-img {
   width: 100%;
-  height: 100%;
+  max-width: 270px;
+  max-height: 210px;
+  height: auto;
   object-fit: contain;
   display: block;
+  transform: none;
 }
 
-/* ─── CARDS 3, 4, 5: Three Equally Sized Cards Below Top-Right Card (Row 2) ─── */
-.bento-item--component {
+/* ─── CARDS 3 & 4: Open-Ear Audio & Power Architecture (Side-by-Side Equal Columns, Row 2) ─── */
+.bento-item--audio {
+  grid-column: 2 / 3;
   grid-row: 2 / 3;
-  padding: 0;
+}
+
+.bento-item--power {
+  grid-column: 3 / 4;
+  grid-row: 2 / 3;
+}
+
+.bento-item--audio,
+.bento-item--power {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: #FFFFFF;
+  padding: 0;
   overflow: hidden;
 }
 
-/* Top: Icon and Text Header */
+/* Shared Component Header for Audio & Power */
 .bento-component-header {
   display: flex;
   flex-direction: column;
@@ -331,8 +315,9 @@
   margin: 0;
 }
 
-/* Bottom: Edge-to-edge media area peeking up from bottom */
-.bento-component-media {
+/* Bottom: Edge-to-edge media area peeking up from bottom for Audio & Power */
+.bento-item--audio .bento-component-media,
+.bento-item--power .bento-component-media {
   flex: 1;
   width: 100%;
   display: flex;
@@ -344,18 +329,128 @@
   min-height: 150px;
 }
 
-.bento-component-img {
-  width: 90%;
-  height: 170px;
+.bento-item--audio .bento-component-img,
+.bento-item--power .bento-component-img {
+  width: 88%;
+  height: 165px;
   object-fit: cover;
-  object-position: 50% 32%;
+  object-position: 50% 30%;
   display: block;
-  transform: translateY(12px);
+  transform: translateY(8px);
+}
+
+/* ─── CARD 5: Bottom Full-Width Banner — Powered by Rockchip RV1106 (Row 3, 100% Width) ─── */
+.bento-item--chip {
+  grid-column: 1 / -1;
+  grid-row: 3 / 4;
+  background-color: #120E1E;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.bento-chip-content {
+  flex: 1 1 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: clamp(26px, 2.5vw, 36px) clamp(28px, 3.5vw, 48px);
+  z-index: 2;
+}
+
+.bento-chip-badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #A855F7;
+  margin-bottom: 2px;
+}
+
+.bento-chip-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 2vw, 1.85rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.bento-chip-desc {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: #94A3B8;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 580px;
+}
+
+.bento-chip-tags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-top: 6px;
+}
+
+.chip-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: #E2E8F0;
+  letter-spacing: -0.01em;
+}
+
+.chip-tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #A855F7;
+  display: inline-block;
+  box-shadow: 0 0 6px rgba(168, 85, 247, 0.6);
+}
+
+/* Right: Directly integrated processor media (NO nested box, NO borders) */
+.bento-chip-media {
+  flex: 1 1 40%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  padding: 16px clamp(20px, 3vw, 40px);
+  overflow: hidden;
+}
+
+.bento-chip-img {
+  width: 100%;
+  max-width: 340px;
+  max-height: 190px;
+  height: auto;
+  object-fit: contain;
+  display: block;
 }
 
 /* ─── Responsive Layout ─── */
 
-/* Tablet: Two-Column Arrangement */
+/* Tablet: 2-Column Arrangement */
 @media (max-width: 1080px) {
   .nayra-bento-grid {
     grid-template-columns: 1fr 1fr;
@@ -366,35 +461,35 @@
   .bento-item--glasses {
     grid-column: 1 / 3;
     grid-row: auto;
-    min-height: 520px;
+    min-height: 500px;
   }
 
   .bento-hero-media {
+    min-height: 250px;
+  }
+
+  .bento-item--camera {
+    grid-column: 1 / 3;
+    grid-row: auto;
     min-height: 260px;
+  }
+
+  .bento-item--audio {
+    grid-column: 1 / 2;
+    grid-row: auto;
+    min-height: 330px;
+  }
+
+  .bento-item--power {
+    grid-column: 2 / 3;
+    grid-row: auto;
+    min-height: 330px;
   }
 
   .bento-item--chip {
     grid-column: 1 / 3;
     grid-row: auto;
-    min-height: 260px;
-  }
-
-  .bento-item--camera {
-    grid-column: 1 / 2;
-    grid-row: auto;
-    min-height: 320px;
-  }
-
-  .bento-item--audio {
-    grid-column: 2 / 3;
-    grid-row: auto;
-    min-height: 320px;
-  }
-
-  .bento-item--power {
-    grid-column: 1 / 3;
-    grid-row: auto;
-    min-height: 320px;
+    min-height: 240px;
   }
 }
 
@@ -415,21 +510,39 @@
   }
 
   .bento-item--glasses,
-  .bento-item--chip,
   .bento-item--camera,
   .bento-item--audio,
-  .bento-item--power {
+  .bento-item--power,
+  .bento-item--chip {
     grid-column: 1 / 2;
     grid-row: auto;
     min-height: unset;
+  }
+
+  .bento-glasses-pillars {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .bento-hero-media {
     min-height: 220px;
   }
 
-  .bento-glasses-pillars {
-    grid-template-columns: repeat(2, 1fr);
+  .bento-item--camera {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .bento-item--camera .bento-component-header {
+    padding: 24px 20px 8px;
+  }
+
+  .bento-item--camera .bento-component-media {
+    min-height: 180px;
+    padding: 8px 20px 20px;
+  }
+
+  .bento-item--camera .bento-component-img {
+    max-width: 220px;
   }
 
   .bento-item--chip {
@@ -437,11 +550,22 @@
     align-items: stretch;
   }
 
-  .bento-chip-media {
-    min-height: 180px;
+  .bento-chip-content {
+    padding: 24px 20px 8px;
   }
 
-  .bento-component-media {
-    min-height: 190px;
+  .bento-chip-media {
+    min-height: 180px;
+    padding: 8px 20px 24px;
+  }
+
+  .bento-chip-img {
+    max-width: 260px;
+    max-height: 160px;
+  }
+
+  .bento-item--audio .bento-component-media,
+  .bento-item--power .bento-component-media {
+    min-height: 180px;
   }
 }

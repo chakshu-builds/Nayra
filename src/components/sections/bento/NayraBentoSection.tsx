@@ -192,9 +192,9 @@ export default function NayraBentoSection({
           </p>
         </header>
 
-        {/* Exactly 5 Cards Bento Grid (40% Left / 60% Right) */}
+        {/* Exactly 5 Cards Bento Grid: Asymmetric Layout with Full-Width Bottom Banner */}
         <div ref={gridRef} className="nayra-bento-grid">
-          {/* ─── CARD 1: Large Left Card (~40% Width, Spanning Both Rows) ─── */}
+          {/* ─── CARD 1: Large Left Hero Card (~40% Width, Spanning Rows 1 & 2) ─── */}
           <article className="bento-item bento-item--glasses">
             {/* Top: Main hero text */}
             <div className="bento-glasses-header">
@@ -260,43 +260,9 @@ export default function NayraBentoSection({
             </div>
           </article>
 
-          {/* ─── CARD 2: Wide Horizontal Card on Top Right (~60% Width, Row 1) ─── */}
-          <article className="bento-item bento-item--chip">
-            {/* Left: Processor text */}
-            <div className="bento-chip-content">
-              <h3 className="bento-chip-title">
-                Powered by Rockchip<br />RV1106
-              </h3>
-              <p className="bento-chip-desc">{content.chipCard.description}</p>
-              
-              {content.chipCard.specs && (
-                <div className="bento-chip-tags">
-                  {content.chipCard.specs.map((spec, i) => (
-                    <span key={i} className="chip-tag-pill">
-                      <span className="chip-tag-dot" />
-                      {spec}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Right: Directly integrated processor image area (no nested box or placeholder shapes) */}
-            <div className="bento-chip-media">
-              {images.rv1106Processor ? (
-                <img
-                  src={images.rv1106Processor}
-                  alt={content.chipCard.imageAlt}
-                  className="bento-chip-img"
-                  loading="lazy"
-                />
-              ) : null}
-            </div>
-          </article>
-
-          {/* ─── CARD 3: Dual Cameras (Text & Icon at Top, Media at Bottom) ─── */}
+          {/* ─── CARD 2: Dual Cameras (Top-Right Slot — Wide Horizontal Card) ─── */}
           <article className="bento-item bento-item--component bento-item--camera">
-            {/* Top: Icon and Text */}
+            {/* Left/Top: Icon and Text */}
             <div className="bento-component-header">
               <div className="bento-component-icon" aria-hidden="true">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -308,7 +274,7 @@ export default function NayraBentoSection({
               <p className="bento-component-desc">{content.cameraCard.description}</p>
             </div>
 
-            {/* Bottom: Media Area peeking from bottom */}
+            {/* Right/Media: Integrated media render */}
             <div className="bento-component-media">
               {images.dualCameras ? (
                 <img
@@ -321,7 +287,7 @@ export default function NayraBentoSection({
             </div>
           </article>
 
-          {/* ─── CARD 4: Open-Ear Audio (Text & Icon at Top, Media at Bottom) ─── */}
+          {/* ─── CARD 3: Open-Ear Audio (Bottom-Right Slot 1 — Equal Column) ─── */}
           <article className="bento-item bento-item--component bento-item--audio">
             {/* Top: Icon and Text */}
             <div className="bento-component-header">
@@ -349,7 +315,7 @@ export default function NayraBentoSection({
             </div>
           </article>
 
-          {/* ─── CARD 5: Power Architecture (Text & Icon at Top, Media at Bottom) ─── */}
+          {/* ─── CARD 4: Power Architecture (Bottom-Right Slot 2 — Equal Column) ─── */}
           <article className="bento-item bento-item--component bento-item--power">
             {/* Top: Icon and Text */}
             <div className="bento-component-header">
@@ -371,6 +337,41 @@ export default function NayraBentoSection({
                   src={images.powerArchitecture}
                   alt={content.powerCard.imageAlt}
                   className="bento-component-img"
+                  loading="lazy"
+                />
+              ) : null}
+            </div>
+          </article>
+
+          {/* ─── CARD 5: Powered by Rockchip RV1106 (Bottom Full-Width Banner) ─── */}
+          <article className="bento-item bento-item--chip">
+            {/* Left: Processor text & feature pills */}
+            <div className="bento-chip-content">
+              {content.chipCard.badge && (
+                <span className="bento-chip-badge">{content.chipCard.badge}</span>
+              )}
+              <h3 className="bento-chip-title">{content.chipCard.title}</h3>
+              <p className="bento-chip-desc">{content.chipCard.description}</p>
+              
+              {content.chipCard.specs && (
+                <div className="bento-chip-tags">
+                  {content.chipCard.specs.map((spec, i) => (
+                    <span key={i} className="chip-tag-pill">
+                      <span className="chip-tag-dot" />
+                      {spec}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Right: Integrated processor chip graphic */}
+            <div className="bento-chip-media">
+              {images.rv1106Processor ? (
+                <img
+                  src={images.rv1106Processor}
+                  alt={content.chipCard.imageAlt}
+                  className="bento-chip-img"
                   loading="lazy"
                 />
               ) : null}
