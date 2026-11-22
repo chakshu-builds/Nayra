@@ -7,7 +7,6 @@
   [View architecture](docs/ARCHITECTURE.md) · [Quality checks](.github/workflows/quality.yml) · [Submission checklist](docs/SUBMISSION_CHECKLIST.md) · [Upgrade report](docs/UPGRADE_REPORT.md) · [Scroll performance changes](docs/SCROLL_PERFORMANCE.md)
 </div>
 
-![NAYRA glasses concept](public/image/NAYRA_Purple_Gradient_Glasses.webp)
 
 ## Why NAYRA?
 
