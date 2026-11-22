@@ -1,0 +1,134 @@
+/* ==========================================================================
+   NAYRA — INTERACTIVE SOCIAL IMPACT BENTO EXPERIENCE
+   Visual Identity: Midnight Black (#0B0B0F), Royal Purple (#8B5CF6),
+                    Deep Violet (#4C1D95), Soft White (#F4F7FA), Lavender (#C4B5FD)
+   ========================================================================== */
+
+.bento-impact-section {
+  position: relative;
+  width: 100%;
+  background-color: var(--color-midnight, #0B0B0F);
+  color: var(--color-soft-white, #F4F7FA);
+  overflow: visible;
+  z-index: 5;
+}
+
+.bento-pin-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: clamp(84px, 9.5vh, 104px) 0 clamp(36px, 5vh, 60px);
+  position: relative;
+}
+
+.bento-container {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 56px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 2.8vh, 36px);
+}
+
+/* ─── Cinematic Opening Brand Statement ─── */
+.bento-impact-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.bento-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-lavender, #C4B5FD);
+  display: inline-block;
+}
+
+.bento-tagline {
+  font-family: var(--font-heading);
+  font-size: clamp(2.25rem, 4.2vw, 4rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: var(--color-soft-white, #F4F7FA);
+  margin: 0;
+}
+
+.bento-tagline-highlight {
+  display: inline-block;
+  background: linear-gradient(135deg, #C4B5FD 0%, #8B5CF6 60%, #A78BFA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bento-lead {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.15vw, 1.125rem);
+  line-height: 1.6;
+  color: rgba(244, 247, 250, 0.7);
+  max-width: 58ch;
+  margin: 0;
+}
+
+/* ─── Bento Cards Stage (3-Column Desktop / Tablet Layout) ─── */
+.bento-cards-stage {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 2.2vw, 32px);
+  width: 100%;
+  align-items: stretch;
+  position: relative;
+}
+
+.bento-card-slot {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Center card slot has natural focal elevation */
+.bento-card-slot:nth-child(2) {
+  z-index: 3;
+}
+
+/* ─── Mobile Viewport (< 768px): Vertical Stack ─── */
+@media (max-width: 767px) {
+  .bento-pin-wrapper {
+    min-height: auto;
+    padding: clamp(28px, 5vw, 44px) 0;
+  }
+
+  .bento-cards-stage {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .bento-impact-header {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .bento-tagline {
+    font-size: clamp(2rem, 5vw, 2.75rem);
+  }
+
+  .bento-lead {
+    font-size: 0.9375rem;
+  }
+}

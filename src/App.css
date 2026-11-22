@@ -1,0 +1,5 @@
+/* App-level layout — minimal, most styling in components */
+main {
+  position: relative;
+  z-index: 0;
+}

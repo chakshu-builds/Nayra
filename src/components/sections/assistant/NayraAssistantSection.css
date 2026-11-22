@@ -1,0 +1,413 @@
+/* ==========================================================================
+   NAYRA — AI ASSISTANT SHOWCASE SECTION (SEAMLESS PURPLE GRADIENT GLASSES)
+   Full-width product demonstration:
+     - Recreates the layout and visual hierarchy with the new NAYRA purple gradient
+     - Background layer: public/image/NAYRA_Purple_Gradient_Glasses.webp
+     - Left (42–45%): Heading, description, and AI conversation demonstration
+     - Right (55–58%): Large prominent NAYRA glasses integrated into gradient
+     - Seamless integration: ZERO image card, ZERO border, ZERO rectangular boundary
+   ========================================================================== */
+
+.nayra-assistant-section {
+  position: relative;
+  width: 100%;
+  background-color: #0A0512;
+  color: #FFFFFF;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: clamp(38px, 4.5vw, 60px) 0;
+  border-top: 1px solid rgba(139, 92, 246, 0.12);
+  min-height: 520px;
+}
+
+/* ─── Full-Bleed Product Gradient Background Layer ─── */
+.assistant-bg-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.assistant-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+  display: block;
+}
+
+/* Seamless Overlays: Left contrast for text + Top/Bottom blend with dark theme */
+.assistant-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(to right, rgba(10, 5, 18, 0.9) 0%, rgba(10, 5, 18, 0.72) 36%, rgba(10, 5, 18, 0.2) 52%, transparent 66%),
+    linear-gradient(to bottom, #0A0512 0%, transparent 10%, transparent 90%, #0A0512 100%);
+  pointer-events: none;
+}
+
+/* ─── Main Section Container ─── */
+.nayra-assistant-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 56px);
+  box-sizing: border-box;
+}
+
+/* ─── 2-Column Grid (Left 42–45% Content, Right 55–58% Visual) ─── */
+.nayra-assistant-grid {
+  display: grid;
+  grid-template-columns: minmax(360px, 460px) 1.35fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   LEFT: Content & Typography Column
+   ══════════════════════════════════════════════════════════════════ */
+.assistant-content-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+/* ─── Small Eyebrow ─── */
+.assistant-eyebrow {
+  display: inline-block;
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #A855F7;
+  margin: 0;
+}
+
+/* ─── Main Heading ─── */
+.assistant-heading {
+  font-family: var(--font-heading, system-ui, sans-serif);
+  font-size: clamp(2.25rem, 3.5vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.assistant-heading-highlight {
+  background: linear-gradient(135deg, #E9D5FF 0%, #C084FC 45%, #9333EA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* ─── Description ─── */
+.assistant-description {
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+  line-height: 1.6;
+  color: #94A3B8;
+  margin: 0 0 6px 0;
+  max-width: 440px;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   PREMIUM CONVERSATION DEMONSTRATION PANEL
+   ══════════════════════════════════════════════════════════════════ */
+.assistant-convo-card {
+  width: 100%;
+  background: rgba(20, 10, 36, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(168, 85, 247, 0.28);
+  border-radius: 20px;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5), 0 0 28px rgba(139, 92, 246, 0.12);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-sizing: border-box;
+}
+
+/* ─── Message Row Container ─── */
+.convo-msg {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.convo-msg-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.convo-sender {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.convo-sender-tag {
+  font-family: var(--font-heading, system-ui, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #C084FC;
+}
+
+.convo-sender-tag--assistant {
+  color: #E9D5FF;
+}
+
+/* ─── Message 1: User ─── */
+.convo-msg--user {
+  padding: 2px 2px 14px 2px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.convo-sender-icon--user {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(168, 85, 247, 0.18);
+  border: 1px solid rgba(168, 85, 247, 0.32);
+  color: #C084FC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Subtle Audio Waveform */
+.convo-waveform {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 18px;
+  padding: 0 4px;
+}
+
+.wave-bar {
+  width: 2.5px;
+  border-radius: 9999px;
+  background: #A855F7;
+  animation: audioWavePulse 1.4s ease-in-out infinite alternate;
+}
+
+.wave-bar-1 { height: 6px; animation-delay: 0.1s; }
+.wave-bar-2 { height: 14px; animation-delay: 0.35s; }
+.wave-bar-3 { height: 18px; animation-delay: 0.15s; }
+.wave-bar-4 { height: 10px; animation-delay: 0.45s; }
+.wave-bar-5 { height: 15px; animation-delay: 0.25s; }
+.wave-bar-6 { height: 7px; animation-delay: 0.55s; }
+
+@keyframes audioWavePulse {
+  0% { transform: scaleY(0.5); opacity: 0.6; }
+  100% { transform: scaleY(1.15); opacity: 1; }
+}
+
+.convo-msg-text {
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 0.95rem;
+  line-height: 1.45;
+  margin: 0;
+  padding-left: 0;
+}
+
+.convo-msg-text--user {
+  color: #E2E8F0;
+  font-weight: 500;
+}
+
+/* ─── Message 2: NAYRA Reply ─── */
+.convo-msg--assistant {
+  background: rgba(124, 58, 237, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.28);
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+
+.convo-sender-icon--assistant {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+}
+
+.convo-hud-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  background: rgba(139, 92, 246, 0.14);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  border-radius: 9999px;
+}
+
+.hud-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #A855F7;
+  box-shadow: 0 0 8px #A855F7;
+  animation: hudPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes hudPulse {
+  0%, 100% { transform: scale(0.9); opacity: 0.7; }
+  50% { transform: scale(1.3); opacity: 1; }
+}
+
+.hud-label {
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #D8B4FE;
+}
+
+.convo-msg-text--assistant {
+  color: #FFFFFF;
+  font-size: 0.925rem;
+  line-height: 1.5;
+  padding-left: 0;
+}
+
+.convo-primary-line {
+  margin: 0;
+  color: #F1F5F9;
+}
+
+.convo-secondary-line {
+  margin: 3px 0 0 0;
+  color: #E2E8F0;
+}
+
+.convo-signal-alert {
+  color: #EF4444;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(239, 68, 68, 0.45);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   RIGHT: NAYRA Smart Glasses Visual Column (55–58% Width)
+   ══════════════════════════════════════════════════════════════════ */
+.assistant-visual-column {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+/* Desktop: Spacer to preserve proportions and reveal background glasses */
+.assistant-desktop-spacer {
+  width: 100%;
+  min-height: 440px;
+  display: block;
+  pointer-events: none;
+}
+
+.assistant-mobile-glasses-wrap {
+  display: none;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   RESPONSIVE DESIGN
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Tablet (<= 1024px) */
+@media (max-width: 1024px) {
+  .nayra-assistant-section {
+    padding: clamp(32px, 4vw, 48px) 0;
+    min-height: auto;
+  }
+
+  .assistant-bg-layer {
+    display: none;
+  }
+
+  .nayra-assistant-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .assistant-content-column {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .assistant-description {
+    max-width: 100%;
+  }
+
+  .assistant-convo-card {
+    max-width: 100%;
+  }
+
+  .assistant-desktop-spacer {
+    display: none;
+  }
+
+  .assistant-mobile-glasses-wrap {
+    display: block;
+    width: 100%;
+    max-width: 580px;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    -webkit-mask-image: radial-gradient(ellipse at 65% 50%, black 65%, transparent 100%);
+    mask-image: radial-gradient(ellipse at 65% 50%, black 65%, transparent 100%);
+  }
+
+  .assistant-mobile-glasses-img {
+    width: 100%;
+    height: auto;
+    max-height: 380px;
+    object-fit: cover;
+    object-position: 85% center;
+    display: block;
+  }
+}
+
+/* Mobile (<= 640px) */
+@media (max-width: 640px) {
+  .assistant-heading {
+    font-size: 2rem;
+  }
+
+  .assistant-convo-card {
+    padding: 18px;
+  }
+
+  .assistant-mobile-glasses-img {
+    max-height: 280px;
+  }
+}

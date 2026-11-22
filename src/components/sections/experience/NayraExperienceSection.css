@@ -1,0 +1,431 @@
+/* ==========================================================================
+   NAYRA — EXPERIENCE NAYRA (PROGRAMMABLE LED DOT-MATRIX HARDWARE SHOWCASE)
+   Design System:
+     - Theme: Midnight Black (#08050F) + Deep Purple
+     - Display background: #05030B
+     - Primary heading: #F8F5FF
+     - Secondary text: #A9A0B8
+     - Accent purple: #9B5CFF
+     - Inactive LED dots: #251333
+     - Active LED dots: #A855F7
+     - Bright LED dots: #C084FC
+     - Highlight dots: #E9D5FF
+     - Dividers: #292035
+   ========================================================================== */
+
+.exp-section {
+  position: relative;
+  background-color: #08050F;
+  color: #F8F5FF;
+  padding: clamp(56px, 6vw, 84px) var(--section-pad-x, clamp(24px, 4.5vw, 64px));
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+}
+
+.exp-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center; /* Vertically center relative to each other */
+  gap: clamp(40px, 5vw, 72px);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   LEFT COLUMN (48% Width)
+   ══════════════════════════════════════════════════════════════════ */
+.exp-left-col {
+  flex: 0 0 48%;
+  max-width: 48%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.exp-header {
+  margin-bottom: clamp(32px, 4.5vw, 44px);
+}
+
+.exp-eyebrow {
+  display: inline-block;
+  font-family: var(--font-heading, 'Sora', system-ui, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #9B5CFF;
+  margin-bottom: 14px;
+}
+
+.exp-heading {
+  font-family: var(--font-heading, 'Sora', system-ui, sans-serif);
+  font-size: clamp(2.3rem, 3.8vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: #F8F5FF;
+  margin: 0 0 16px;
+}
+
+.exp-description {
+  font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+  font-size: clamp(1rem, 1.2vw, 1.125rem);
+  line-height: 1.6;
+  color: #A9A0B8;
+  margin: 0;
+  max-width: 520px;
+}
+
+/* ─── 5 Interactive Feature Rows ─── */
+.exp-features-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-top: 1px solid #292035;
+}
+
+.exp-feature-row {
+  appearance: none;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #292035;
+  padding: 20px 18px 20px 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.exp-feature-row:hover {
+  background-color: rgba(155, 92, 255, 0.05);
+}
+
+.exp-feature-row.is-active {
+  background-color: rgba(155, 92, 255, 0.10);
+}
+
+/* Thin Purple Vertical Indicator along Left Edge */
+.exp-feature-row::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3.5px;
+  background-color: #9B5CFF;
+  opacity: 0;
+  transform: scaleY(0.4);
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.exp-feature-row.is-active::before {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.exp-feature-row__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  color: #9B5CFF;
+  background: rgba(155, 92, 255, 0.08);
+  flex-shrink: 0;
+  transition: color 0.25s ease, background-color 0.25s ease;
+}
+
+.exp-feature-row.is-active .exp-feature-row__icon {
+  color: #C084FC;
+  background: rgba(155, 92, 255, 0.18);
+}
+
+.exp-feature-row__content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.exp-feature-row__title {
+  font-family: var(--font-heading, 'Sora', system-ui, sans-serif);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #F8F5FF;
+  transition: color 0.2s ease;
+}
+
+.exp-feature-row.is-active .exp-feature-row__title {
+  color: #C084FC;
+}
+
+.exp-feature-row__desc {
+  font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+  font-size: 0.875rem;
+  color: #A9A0B8;
+  line-height: 1.45;
+  transition: color 0.2s ease;
+}
+
+.exp-feature-row.is-active .exp-feature-row__desc {
+  color: #DDD6FE;
+}
+
+.exp-feature-row__arrow {
+  color: #5D4A70;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+}
+
+.exp-feature-row.is-active .exp-feature-row__arrow {
+  color: #9B5CFF;
+  transform: translateX(4px);
+}
+
+.exp-feature-row:focus-visible {
+  outline: 2px solid #9B5CFF;
+  outline-offset: -2px;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   RIGHT COLUMN (52% Width) — REAL LED DOT-MATRIX VIEWPORT
+   ══════════════════════════════════════════════════════════════════ */
+.exp-right-col {
+  flex: 0 0 52%;
+  max-width: 52%;
+  display: flex;
+  align-items: center; /* Vertically center the compact panel */
+  justify-content: center;
+}
+
+/* Near-Square Compact LED Panel with Premium Violet Outline */
+.exp-matrix-viewport {
+  position: relative;
+  background-color: #05030B;
+  width: 100%;
+  aspect-ratio: 1.15 / 1;
+  max-height: 540px;
+  border-radius: 18px;
+  border: 1px solid rgba(168, 85, 247, 0.65);
+  box-shadow:
+    0 0 0 1px rgba(168, 85, 247, 0.08),
+    0 0 24px rgba(139, 92, 246, 0.10);
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+}
+
+/* Edge-to-Edge Continuous Programmable Canvas */
+.exp-matrix-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ─── Transparent HTML Typography Overlay Layer ─── */
+.exp-matrix-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(16px, 2.5vw, 24px) clamp(18px, 3vw, 28px);
+  pointer-events: none;
+  z-index: 5;
+  box-sizing: border-box;
+}
+
+/* Lower Area: Crisp Normal HTML Typography */
+.exp-matrix-text-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 6px;
+  animation: matrixTextFadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes matrixTextFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.exp-matrix-heading {
+  font-family: var(--font-heading, 'Sora', system-ui, sans-serif);
+  font-size: clamp(1.25rem, 1.85vw, 1.5625rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: #F5F0FF;
+  margin: 0 0 6px;
+  text-shadow: 0 2px 14px rgba(5, 3, 11, 0.95);
+}
+
+.exp-matrix-supporting {
+  font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+  font-size: clamp(0.875rem, 1.1vw, 0.95rem);
+  font-weight: 400;
+  line-height: 1.45;
+  color: #C4B5FD;
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(5, 3, 11, 0.95);
+}
+
+/* Dialogue style for Ask NAYRA */
+.exp-matrix-dialogue {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 440px;
+  text-align: left;
+  background: rgba(8, 5, 15, 0.55);
+  border: 1px solid rgba(168, 85, 247, 0.18);
+  border-radius: 12px;
+  padding: 10px 14px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-sizing: border-box;
+}
+
+.exp-dialogue-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.exp-dialogue-speaker {
+  font-family: var(--font-heading, 'Sora', system-ui, sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #A855F7;
+}
+
+.exp-dialogue-text {
+  font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0;
+  text-shadow: 0 2px 12px rgba(5, 3, 11, 0.95);
+}
+
+.exp-dialogue-user .exp-dialogue-text {
+  color: #C4B5FD;
+}
+
+.exp-dialogue-response .exp-dialogue-text {
+  color: #F5F0FF;
+  font-weight: 600;
+}
+
+/* Small Replay Control */
+.exp-matrix-replay {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  appearance: none;
+  background: rgba(8, 5, 15, 0.75);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  color: #A9A0B8;
+  font-family: var(--font-heading, 'Sora', system-ui, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.exp-matrix-replay:hover {
+  background: rgba(155, 92, 255, 0.16);
+  color: #F8F5FF;
+  border-color: #9B5CFF;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   RESPONSIVE DESIGN
+   ══════════════════════════════════════════════════════════════════ */
+@media (max-width: 1040px) {
+  .exp-container {
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .exp-left-col {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .exp-right-col {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .exp-matrix-viewport {
+    max-height: 480px;
+  }
+}
+
+@media (max-width: 640px) {
+  .exp-section {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .exp-feature-row {
+    padding: 16px 12px;
+    gap: 14px;
+  }
+
+  .exp-feature-row__title {
+    font-size: 0.9375rem;
+  }
+
+  .exp-feature-row__desc {
+    font-size: 0.8125rem;
+  }
+
+  .exp-matrix-viewport {
+    aspect-ratio: 1.1 / 1;
+    max-height: 420px;
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .exp-feature-row,
+  .exp-feature-row::before,
+  .exp-matrix-replay {
+    transition: none !important;
+  }
+}

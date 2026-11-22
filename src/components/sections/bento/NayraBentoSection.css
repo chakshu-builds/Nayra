@@ -1,0 +1,497 @@
+/* ==========================================================================
+   NAYRA — 5-CARD BENTO GRID SECTION (LAVENDER PRODUCT SHOWCASE)
+   Geometry matching reference design:
+     - Card 1 (Left): NAYRA Smart Glasses (~40% width, spanning rows 1 & 2)
+     - Card 2 (Top Right): Powered by Rockchip RV1106 (~60% width, row 1)
+     - Card 3 (Bottom Right 1): Dual Cameras (row 2, column 2)
+     - Card 4 (Bottom Right 2): Open-Ear Audio (row 2, column 3)
+     - Card 5 (Bottom Right 3): All-Day Power (row 2, column 4)
+     - Gaps: 16px, Outer Radius: 30px, Overflow: hidden
+   ========================================================================== */
+
+.nayra-bento-section {
+  position: relative;
+  width: 100%;
+  background-color: #F8F7FC;
+  color: #0F172A;
+  padding: clamp(56px, 7vw, 96px) 0;
+  box-sizing: border-box;
+}
+
+.nayra-bento-container {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 3.5vw, 48px);
+  box-sizing: border-box;
+}
+
+/* ─── Section Header ─── */
+.nayra-bento-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto clamp(32px, 4.5vw, 52px);
+}
+
+.nayra-bento-eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #7828E8;
+  margin-bottom: 10px;
+}
+
+.nayra-bento-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.2vw, 2.85rem);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  color: #111018;
+  margin: 0 0 10px 0;
+}
+
+.nayra-bento-subtext {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.2vw, 1.075rem);
+  line-height: 1.55;
+  color: #55546A;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+/* ─── 5-Card Bento Grid Layout (4 Columns x 2 Rows) ─── */
+.nayra-bento-grid {
+  display: grid;
+  grid-template-columns: 2.1fr 1fr 1fr 1fr;
+  grid-template-rows: 275px 355px;
+  gap: 16px;
+  align-items: stretch;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ─── Base Card Surface ─── */
+.bento-item {
+  position: relative;
+  border-radius: 30px;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(120, 40, 232, 0.08);
+}
+
+/* ─── CARD 1: NAYRA Smart Glasses (Left Column, Rows 1 & 2) ─── */
+.bento-item--glasses {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+  background: linear-gradient(165deg, #F8F4FF 0%, #E9D9FF 100%);
+  border: 1px solid rgba(120, 40, 232, 0.12);
+  box-shadow: 0 4px 24px rgba(120, 40, 232, 0.05);
+  padding: 30px 32px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bento-glasses-header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.bento-glasses-brand {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: #111018;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.bento-brand-dot {
+  color: #7828E8;
+}
+
+.bento-glasses-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 2.7vw, 2.85rem);
+  font-weight: 700;
+  line-height: 1.14;
+  letter-spacing: -0.025em;
+  color: #111018;
+  margin: 4px 0 6px 0;
+}
+
+.bento-title-accent {
+  color: #7828E8;
+  font-style: italic;
+}
+
+.bento-glasses-desc {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: #55546A;
+  margin: 0;
+  line-height: 1.45;
+}
+
+.bento-glasses-media {
+  position: relative;
+  width: calc(100% + 64px);
+  margin-left: -32px;
+  margin-right: -32px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  max-height: 330px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  z-index: 1;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+}
+
+.bento-glasses-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 52%;
+  filter: drop-shadow(0 14px 28px rgba(120, 40, 232, 0.12));
+}
+
+.bento-glasses-pillars {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 14px;
+  border-top: 1px solid rgba(120, 40, 232, 0.14);
+}
+
+.bento-pillar-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #111018;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.pillar-icon {
+  color: #7828E8;
+  flex-shrink: 0;
+}
+
+.pillar-divider {
+  width: 1px;
+  height: 18px;
+  background-color: rgba(120, 40, 232, 0.18);
+}
+
+/* ─── CARD 2: Powered by Rockchip RV1106 (Top Right, Spanning Columns 2 to 5) ─── */
+.bento-item--chip {
+  grid-column: 2 / 5;
+  grid-row: 1 / 2;
+  background-color: #0E0719;
+  border: 1px solid rgba(139, 61, 255, 0.28);
+  box-shadow: 0 10px 30px rgba(16, 9, 29, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 34px;
+}
+
+.bento-chip-content {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 52%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bento-chip-icon-box {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  border: 1px solid rgba(168, 85, 247, 0.45);
+  background: rgba(168, 85, 247, 0.12);
+  color: #A855F7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 14px rgba(168, 85, 247, 0.25);
+}
+
+.bento-chip-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.35rem, 1.8vw, 1.7rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.bento-chip-desc {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: #BDB4CE;
+  line-height: 1.45;
+  margin: 0;
+  max-width: 290px;
+}
+
+.bento-chip-media {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 54%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.bento-chip-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 85% center;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.4) 14%, black 32%);
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.4) 14%, black 32%);
+}
+
+/* ─── CARDS 3, 4, 5: The Sub Cards (Bottom Row, Side-by-Side Equal Columns) ─── */
+.bento-item--sub {
+  background: linear-gradient(165deg, #F8F4FF 0%, #E8D8FF 100%);
+  border: 1px solid rgba(120, 40, 232, 0.12);
+  box-shadow: 0 4px 20px rgba(120, 40, 232, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0;
+}
+
+.bento-item--camera {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+.bento-item--audio {
+  grid-column: 3 / 4;
+  grid-row: 2 / 3;
+}
+
+.bento-item--power {
+  grid-column: 4 / 5;
+  grid-row: 2 / 3;
+}
+
+/* Media area at TOP of sub cards — rigid fixed height for 100% horizontal symmetry */
+.bento-sub-media {
+  position: relative;
+  width: 100%;
+  height: 190px;
+  flex: 0 0 190px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 82%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 82%, transparent 100%);
+}
+
+.bento-sub-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.bento-sub-img--camera {
+  object-fit: cover;
+  object-position: center top;
+}
+
+.bento-sub-img--audio {
+  object-fit: cover;
+  object-position: center 25%;
+}
+
+.bento-sub-img--power {
+  object-fit: cover;
+  object-position: center 58%;
+}
+
+/* Text & Icon at BOTTOM of sub cards — strictly aligned on the same horizontal baseline */
+.bento-sub-footer {
+  position: relative;
+  z-index: 2;
+  padding: 10px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  flex: 1;
+}
+
+.bento-sub-icon {
+  color: #7828E8;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 24px;
+  width: 24px;
+  margin-bottom: 2px;
+}
+
+.bento-sub-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: #111018;
+  margin: 0;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.bento-sub-desc {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: #55546A;
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* ─── Responsive Layout ─── */
+
+/* Tablet (<= 1080px): 2-Column Grid */
+@media (max-width: 1080px) {
+  .nayra-bento-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 16px;
+  }
+
+  .bento-item--glasses {
+    grid-column: 1 / 3;
+    grid-row: auto;
+    min-height: 520px;
+  }
+
+  .bento-item--chip {
+    grid-column: 1 / 3;
+    grid-row: auto;
+    min-height: 240px;
+  }
+
+  .bento-item--camera {
+    grid-column: 1 / 2;
+    grid-row: auto;
+    min-height: 330px;
+  }
+
+  .bento-item--audio {
+    grid-column: 2 / 3;
+    grid-row: auto;
+    min-height: 330px;
+  }
+
+  .bento-item--power {
+    grid-column: 1 / 3;
+    grid-row: auto;
+    min-height: 330px;
+  }
+}
+
+/* Mobile (<= 768px): Single Column Stack */
+@media (max-width: 768px) {
+  .nayra-bento-section {
+    padding: 44px 0;
+  }
+
+  .nayra-bento-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 16px;
+  }
+
+  .bento-item {
+    border-radius: 24px;
+  }
+
+  .bento-item--glasses {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    min-height: 520px;
+    padding: 26px 22px 20px;
+  }
+
+  .bento-glasses-pillars {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .pillar-divider {
+    display: none;
+  }
+
+  .bento-item--chip {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 360px;
+    padding: 24px 20px;
+  }
+
+  .bento-chip-content {
+    max-width: 100%;
+  }
+
+  .bento-chip-media {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    margin-top: 10px;
+  }
+
+  .bento-chip-img {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.4) 10%, black 25%);
+    mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.4) 10%, black 25%);
+  }
+
+  .bento-item--camera,
+  .bento-item--audio,
+  .bento-item--power {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    min-height: 330px;
+  }
+}

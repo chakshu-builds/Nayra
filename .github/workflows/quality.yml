@@ -1,0 +1,32 @@
+name: NAYRA quality checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Typecheck, lint, tests, assets and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Lint
+        run: npm run lint
+      - name: Unit tests
+        run: npm run test
+      - name: Verify media references
+        run: npm run verify:assets
+      - name: Typecheck and production bundle
+        run: npm run build

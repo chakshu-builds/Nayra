@@ -1,0 +1,281 @@
+/* ==========================================================================
+   NAYRA — DETAILED SPECIFICATIONS SECTION
+   Design System:
+     - Minimal, premium, light-purple theme
+     - Background: very light lavender (#FAF8FF)
+     - Text: dark charcoal (#171321)
+     - Accent: subtle NAYRA purple (#8B5CF6)
+     - Five clean columns on desktop with thin light-gray horizontal separators
+     - Natural column heights (no artificial card stretching)
+     - Functional, smooth, subtle expand/collapse details
+     - No shadows, card boxes, heavy gradients or decorative AI graphics
+   ========================================================================== */
+
+.spec-section {
+  position: relative;
+  background-color: #FAF8FF;
+  color: #171321;
+  padding: clamp(40px, 4.5vw, 64px) var(--section-pad-x, clamp(24px, 4.5vw, 64px)) clamp(36px, 4vw, 52px);
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+}
+
+.spec-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ─── Section Header ─── */
+.spec-header {
+  margin-bottom: clamp(32px, 4vw, 48px);
+  max-width: 760px;
+}
+
+.spec-eyebrow {
+  display: inline-block;
+  font-family: var(--font-heading, 'Sora', system-ui, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8B5CF6;
+  margin-bottom: 14px;
+}
+
+.spec-headline {
+  font-family: var(--font-heading, 'Sora', system-ui, sans-serif);
+  font-size: clamp(2.4rem, 4.2vw, 3.75rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #171321;
+  margin: 0 0 16px;
+}
+
+.spec-subtitle {
+  font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+  font-size: clamp(1rem, 1.25vw, 1.125rem);
+  line-height: 1.6;
+  color: #5D566B;
+  margin: 0;
+  max-width: 640px;
+}
+
+/* ─── 5-Column Clean Desktop Grid ─── */
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  column-gap: clamp(24px, 3vw, 44px);
+  row-gap: 56px;
+  align-items: flex-start; /* Preserves natural height per column */
+  width: 100%;
+}
+
+/* ─── Column Unit ─── */
+.spec-column {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.spec-col-title {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--font-heading, 'Sora', system-ui, sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #171321;
+  margin: 0 0 20px;
+  padding-bottom: 16px;
+  border-bottom: 1.5px solid #171321;
+}
+
+.spec-col-index {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #8B5CF6;
+}
+
+/* ─── Spec Rows List ─── */
+.spec-col-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.spec-row {
+  display: flex;
+  flex-direction: column;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(23, 19, 33, 0.08);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  position: relative;
+}
+
+.spec-row--expandable {
+  cursor: pointer;
+}
+
+.spec-row--expandable:hover {
+  border-bottom-color: rgba(139, 92, 246, 0.35);
+}
+
+.spec-row--expandable:hover .spec-row__label {
+  color: #8B5CF6;
+}
+
+.spec-row--expandable:focus-visible {
+  outline: 2px solid #8B5CF6;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Row Main Content */
+.spec-row__main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+}
+
+.spec-row__content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+
+.spec-row__label {
+  font-family: var(--font-heading, 'Sora', system-ui, sans-serif);
+  font-size: 0.84375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  color: #171321;
+  transition: color 0.2s ease;
+}
+
+.spec-row__value {
+  font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #5D566B;
+}
+
+/* Chevron Icon */
+.spec-row__chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #8B5CF6;
+  margin-top: 2px;
+  flex-shrink: 0;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+}
+
+.spec-row--expanded .spec-row__chevron {
+  transform: rotate(180deg);
+  color: #171321;
+}
+
+/* Expandable Detail Panel */
+.spec-row__details {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, margin 0.25s ease;
+  opacity: 0;
+  margin-top: 0;
+}
+
+.spec-row__details.is-visible {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-top: 8px;
+}
+
+.spec-row__details p {
+  overflow: hidden;
+  margin: 0;
+  font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+  font-size: 0.78125rem;
+  line-height: 1.5;
+  color: #4A4356;
+  background: rgba(139, 92, 246, 0.05);
+  border-left: 2px solid #8B5CF6;
+  padding: 8px 10px;
+  border-radius: 0 4px 4px 0;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Tablet & Smaller Desktops: 2–3 Columns */
+@media (max-width: 1140px) {
+  .spec-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 36px;
+    row-gap: 48px;
+  }
+}
+
+@media (max-width: 840px) {
+  .spec-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 32px;
+    row-gap: 44px;
+  }
+
+  .spec-section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+}
+
+/* Mobile: Stacked Single Column */
+@media (max-width: 580px) {
+  .spec-grid {
+    grid-template-columns: 1fr;
+    row-gap: 40px;
+  }
+
+  .spec-section {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .spec-header {
+    margin-bottom: 40px;
+  }
+
+  .spec-col-title {
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+  }
+}
+
+/* Native keyboard-accessible expand buttons without changing the editorial layout. */
+.spec-row__trigger {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+.spec-row__trigger:focus-visible {
+  outline: 2px solid #8B5CF6;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+.spec-row__details[hidden] { display: none; }
