@@ -12,10 +12,14 @@
 .nayra-bento-section {
   position: relative;
   width: 100%;
-  background-color: #F8F7FC;
+  background:
+    radial-gradient(ellipse 85% 60% at 50% 35%, rgba(196, 181, 253, 0.18) 0%, rgba(235, 226, 250, 0.1) 60%, transparent 100%),
+    linear-gradient(180deg, #F5F0FA 0%, #FAF6FD 50%, #F3EDF9 100%);
+  background-color: #F5F0FA;
   color: #0F172A;
   padding: clamp(56px, 7vw, 96px) 0;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .nayra-bento-container {

@@ -13,7 +13,10 @@
 
 .spec-section {
   position: relative;
-  background-color: #FAF8FF;
+  background:
+    radial-gradient(ellipse 85% 60% at 50% 25%, rgba(196, 181, 253, 0.18) 0%, rgba(235, 226, 250, 0.1) 60%, transparent 100%),
+    linear-gradient(180deg, #F5F0FA 0%, #FAF6FD 50%, #F3EDF9 100%);
+  background-color: #F5F0FA;
   color: #171321;
   padding: clamp(40px, 4.5vw, 64px) var(--section-pad-x, clamp(24px, 4.5vw, 64px)) clamp(36px, 4vw, 52px);
   box-sizing: border-box;
