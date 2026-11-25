@@ -18,8 +18,8 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: clamp(50px, 7vh, 80px) 0;
+  justify-content: flex-start;
+  padding: clamp(84px, 9.5vh, 104px) 0 clamp(36px, 5vh, 60px);
   position: relative;
 }
 
@@ -30,7 +30,7 @@
   padding: 0 clamp(20px, 4vw, 56px);
   display: flex;
   flex-direction: column;
-  gap: clamp(32px, 4.5vh, 52px);
+  gap: clamp(20px, 2.8vh, 36px);
 }
 
 /* ─── Cinematic Opening Brand Statement ─── */
@@ -109,7 +109,7 @@
 @media (max-width: 767px) {
   .bento-pin-wrapper {
     min-height: auto;
-    padding: clamp(50px, 8vw, 80px) 0;
+    padding: clamp(28px, 5vw, 44px) 0;
   }
 
   .bento-cards-stage {

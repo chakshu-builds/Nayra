@@ -1,21 +1,58 @@
 /* ==========================================================================
-   NAYRA — AI-POWERED ASSISTIVE SMART GLASSES SECTION
-   Clean, simple, and uncluttered split layout:
-     - Left: NAYRA assistive info, voice prompts, architecture & dev note
-     - Right: Blank/open space reserved for specs image (clean placeholder slot)
+   NAYRA — AI ASSISTANT SHOWCASE SECTION (SEAMLESS PURPLE GRADIENT GLASSES)
+   Full-width product demonstration:
+     - Recreates the layout and visual hierarchy with the new NAYRA purple gradient
+     - Background layer: public/image/NAYRA_Purple_Gradient_Glasses.webp
+     - Left (42–45%): Heading, description, and AI conversation demonstration
+     - Right (55–58%): Large prominent NAYRA glasses integrated into gradient
+     - Seamless integration: ZERO image card, ZERO border, ZERO rectangular boundary
    ========================================================================== */
 
 .nayra-assistant-section {
   position: relative;
   width: 100%;
-  background-color: var(--color-midnight, #0B0B0F);
-  color: var(--color-soft-white, #F4F7FA);
-  padding: clamp(64px, 7vw, 108px) 0;
-  border-top: 1px solid rgba(139, 92, 246, 0.1);
+  background-color: #0A0512;
+  color: #FFFFFF;
+  overflow: hidden;
   box-sizing: border-box;
+  padding: clamp(38px, 4.5vw, 60px) 0;
+  border-top: 1px solid rgba(139, 92, 246, 0.12);
+  min-height: 520px;
 }
 
+/* ─── Full-Bleed Product Gradient Background Layer ─── */
+.assistant-bg-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.assistant-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+  display: block;
+}
+
+/* Seamless Overlays: Left contrast for text + Top/Bottom blend with dark theme */
+.assistant-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(to right, rgba(10, 5, 18, 0.9) 0%, rgba(10, 5, 18, 0.72) 36%, rgba(10, 5, 18, 0.2) 52%, transparent 66%),
+    linear-gradient(to bottom, #0A0512 0%, transparent 10%, transparent 90%, #0A0512 100%);
+  pointer-events: none;
+}
+
+/* ─── Main Section Container ─── */
 .nayra-assistant-container {
+  position: relative;
+  z-index: 2;
   width: 100%;
   max-width: 1360px;
   margin: 0 auto;
@@ -23,384 +60,354 @@
   box-sizing: border-box;
 }
 
-/* ─── Responsive Split Layout ─── */
+/* ─── 2-Column Grid (Left 42–45% Content, Right 55–58% Visual) ─── */
 .nayra-assistant-grid {
   display: grid;
-  grid-template-columns: 1.35fr 1fr;
-  gap: clamp(36px, 4.5vw, 64px);
-  align-items: start;
+  grid-template-columns: minmax(360px, 460px) 1.35fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
   width: 100%;
   box-sizing: border-box;
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   LEFT: Content & Technical Information
+   LEFT: Content & Typography Column
    ══════════════════════════════════════════════════════════════════ */
-.nayra-assistant-left {
+.assistant-content-column {
   display: flex;
   flex-direction: column;
-  gap: clamp(28px, 3.5vw, 40px);
+  align-items: flex-start;
+  gap: 16px;
   width: 100%;
+  box-sizing: border-box;
+  z-index: 2;
 }
 
-/* ─── Header: Title & Core Idea ─── */
-.assistant-header {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.assistant-badge {
+/* ─── Small Eyebrow ─── */
+.assistant-eyebrow {
   display: inline-block;
   font-family: var(--font-body, system-ui, sans-serif);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #A78BFA;
+  color: #A855F7;
+  margin: 0;
 }
 
-.assistant-title {
+/* ─── Main Heading ─── */
+.assistant-heading {
   font-family: var(--font-heading, system-ui, sans-serif);
-  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-size: clamp(2.25rem, 3.5vw, 3.25rem);
   font-weight: 700;
-  line-height: 1.18;
+  line-height: 1.15;
   letter-spacing: -0.025em;
   color: #FFFFFF;
   margin: 0;
 }
 
-.assistant-core-idea {
+.assistant-heading-highlight {
+  background: linear-gradient(135deg, #E9D5FF 0%, #C084FC 45%, #9333EA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* ─── Description ─── */
+.assistant-description {
   font-family: var(--font-body, system-ui, sans-serif);
-  font-size: clamp(1rem, 1.25vw, 1.125rem);
-  line-height: 1.65;
-  color: #CBD5E1;
-  margin: 4px 0 0 0;
-  max-width: 680px;
-}
-
-/* ─── Section Blocks ─── */
-.assistant-block {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.assistant-block-title {
-  font-family: var(--font-heading, system-ui, sans-serif);
-  font-size: 1.15rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: #FFFFFF;
-  margin: 0;
-}
-
-/* ─── Voice Prompts ─── */
-.voice-prompts-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
-  width: 100%;
-}
-
-.voice-prompt-group {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  background-color: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 14px;
-  padding: 16px 18px;
-}
-
-.wake-word-tag {
-  font-family: var(--font-heading, system-ui, sans-serif);
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: #C4B5FD;
-  letter-spacing: -0.01em;
-}
-
-.prompt-items-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.prompt-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 6px;
-}
-
-.prompt-quote {
-  font-family: Georgia, serif;
-  font-size: 1.1rem;
-  line-height: 1;
-  color: #8B5CF6;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-.prompt-body {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.prompt-query {
-  font-family: var(--font-body, system-ui, sans-serif);
-  font-size: 0.85rem;
-  font-weight: 500;
-  line-height: 1.45;
-  color: #F1F5F9;
-}
-
-.prompt-context {
-  font-family: var(--font-body, system-ui, sans-serif);
-  font-size: 0.75rem;
-  line-height: 1.35;
+  font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+  line-height: 1.6;
   color: #94A3B8;
-}
-
-/* ─── Current Technical Architecture & Status ─── */
-.architecture-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  width: 100%;
-}
-
-.arch-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  background-color: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 10px;
-  padding: 10px 14px;
-}
-
-.arch-code {
-  font-family: monospace;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #8B5CF6;
-  flex-shrink: 0;
-}
-
-.arch-name {
-  font-family: var(--font-body, system-ui, sans-serif);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  color: #E2E8F0;
-  flex: 1;
-}
-
-.arch-status-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-family: var(--font-body, system-ui, sans-serif);
-  font-size: 0.685rem;
-  font-weight: 600;
-  padding: 3px 8px;
-  border-radius: 9999px;
-  flex-shrink: 0;
-  white-space: nowrap;
-}
-
-.arch-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-}
-
-.status--developed {
-  background-color: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.25);
-  color: #34D399;
-}
-.status--developed .arch-dot {
-  background-color: #10B981;
-}
-
-.status--implemented {
-  background-color: rgba(139, 92, 246, 0.12);
-  border: 1px solid rgba(139, 92, 246, 0.28);
-  color: #C4B5FD;
-}
-.status--implemented .arch-dot {
-  background-color: #A855F7;
-}
-
-.status--pending {
-  background-color: rgba(245, 158, 11, 0.1);
-  border: 1px solid rgba(245, 158, 11, 0.25);
-  color: #FBBF24;
-}
-.status--pending .arch-dot {
-  background-color: #F59E0B;
-}
-
-/* ─── Dev & Hardware Note ─── */
-.dev-hardware-note {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 14px 18px;
-  background-color: rgba(139, 92, 246, 0.04);
-  border: 1px solid rgba(139, 92, 246, 0.18);
-  border-radius: 12px;
-}
-
-.note-header {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-body, system-ui, sans-serif);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #C4B5FD;
-}
-
-.note-text {
-  font-family: var(--font-body, system-ui, sans-serif);
-  font-size: 0.8125rem;
-  line-height: 1.55;
-  color: #CBD5E1;
-  margin: 0;
+  margin: 0 0 6px 0;
+  max-width: 440px;
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   RIGHT: Blank/Open Space Reserved for Specs Image
+   PREMIUM CONVERSATION DEMONSTRATION PANEL
    ══════════════════════════════════════════════════════════════════ */
-.nayra-assistant-right {
+.assistant-convo-card {
   width: 100%;
-  position: sticky;
-  top: 96px;
-}
-
-.specs-image-slot {
-  width: 100%;
-  min-height: 480px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 0.015);
-  border: 1px dashed rgba(139, 92, 246, 0.25);
+  background: rgba(20, 10, 36, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(168, 85, 247, 0.28);
   border-radius: 20px;
-  padding: 24px;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5), 0 0 28px rgba(139, 92, 246, 0.12);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
   box-sizing: border-box;
 }
 
-.specs-rendered-img {
-  width: 100%;
-  max-width: 480px;
-  max-height: 440px;
-  object-fit: contain;
-  display: block;
-}
-
-/* Clean Placeholder Slot Ready to Drop Image Asset Into Later */
-.specs-slot-placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 32px 20px;
-}
-
-.placeholder-content {
+/* ─── Message Row Container ─── */
+.convo-msg {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 10px;
+  width: 100%;
 }
 
-.placeholder-icon-circle {
-  width: 52px;
-  height: 52px;
+.convo-msg-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.convo-sender {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.convo-sender-tag {
+  font-family: var(--font-heading, system-ui, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #C084FC;
+}
+
+.convo-sender-tag--assistant {
+  color: #E9D5FF;
+}
+
+/* ─── Message 1: User ─── */
+.convo-msg--user {
+  padding: 2px 2px 14px 2px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.convo-sender-icon--user {
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  background-color: rgba(139, 92, 246, 0.08);
-  border: 1px solid rgba(139, 92, 246, 0.2);
+  background: rgba(168, 85, 247, 0.18);
+  border: 1px solid rgba(168, 85, 247, 0.32);
+  color: #C084FC;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #A78BFA;
-  margin-bottom: 4px;
+  flex-shrink: 0;
 }
 
-.placeholder-title {
-  font-family: var(--font-heading, system-ui, sans-serif);
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #E2E8F0;
-  letter-spacing: -0.01em;
+/* Subtle Audio Waveform */
+.convo-waveform {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 18px;
+  padding: 0 4px;
 }
 
-.placeholder-desc {
+.wave-bar {
+  width: 2.5px;
+  border-radius: 9999px;
+  background: #A855F7;
+  animation: audioWavePulse 1.4s ease-in-out infinite alternate;
+}
+
+.wave-bar-1 { height: 6px; animation-delay: 0.1s; }
+.wave-bar-2 { height: 14px; animation-delay: 0.35s; }
+.wave-bar-3 { height: 18px; animation-delay: 0.15s; }
+.wave-bar-4 { height: 10px; animation-delay: 0.45s; }
+.wave-bar-5 { height: 15px; animation-delay: 0.25s; }
+.wave-bar-6 { height: 7px; animation-delay: 0.55s; }
+
+@keyframes audioWavePulse {
+  0% { transform: scaleY(0.5); opacity: 0.6; }
+  100% { transform: scaleY(1.15); opacity: 1; }
+}
+
+.convo-msg-text {
   font-family: var(--font-body, system-ui, sans-serif);
-  font-size: 0.785rem;
-  color: #94A3B8;
-  max-width: 260px;
+  font-size: 0.95rem;
   line-height: 1.45;
+  margin: 0;
+  padding-left: 0;
 }
 
-/* ─── Responsive Breakpoints ─── */
+.convo-msg-text--user {
+  color: #E2E8F0;
+  font-weight: 500;
+}
 
-/* Tablet (<= 1080px) */
-@media (max-width: 1080px) {
+/* ─── Message 2: NAYRA Reply ─── */
+.convo-msg--assistant {
+  background: rgba(124, 58, 237, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.28);
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+
+.convo-sender-icon--assistant {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+}
+
+.convo-hud-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  background: rgba(139, 92, 246, 0.14);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  border-radius: 9999px;
+}
+
+.hud-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #A855F7;
+  box-shadow: 0 0 8px #A855F7;
+  animation: hudPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes hudPulse {
+  0%, 100% { transform: scale(0.9); opacity: 0.7; }
+  50% { transform: scale(1.3); opacity: 1; }
+}
+
+.hud-label {
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #D8B4FE;
+}
+
+.convo-msg-text--assistant {
+  color: #FFFFFF;
+  font-size: 0.925rem;
+  line-height: 1.5;
+  padding-left: 0;
+}
+
+.convo-primary-line {
+  margin: 0;
+  color: #F1F5F9;
+}
+
+.convo-secondary-line {
+  margin: 3px 0 0 0;
+  color: #E2E8F0;
+}
+
+.convo-signal-alert {
+  color: #EF4444;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(239, 68, 68, 0.45);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   RIGHT: NAYRA Smart Glasses Visual Column (55–58% Width)
+   ══════════════════════════════════════════════════════════════════ */
+.assistant-visual-column {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+/* Desktop: Spacer to preserve proportions and reveal background glasses */
+.assistant-desktop-spacer {
+  width: 100%;
+  min-height: 440px;
+  display: block;
+  pointer-events: none;
+}
+
+.assistant-mobile-glasses-wrap {
+  display: none;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   RESPONSIVE DESIGN
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Tablet (<= 1024px) */
+@media (max-width: 1024px) {
+  .nayra-assistant-section {
+    padding: clamp(32px, 4vw, 48px) 0;
+    min-height: auto;
+  }
+
+  .assistant-bg-layer {
+    display: none;
+  }
+
   .nayra-assistant-grid {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 36px;
   }
 
-  .nayra-assistant-right {
-    position: static;
+  .assistant-content-column {
+    max-width: 100%;
+    width: 100%;
   }
 
-  .specs-image-slot {
-    min-height: 300px;
+  .assistant-description {
+    max-width: 100%;
+  }
+
+  .assistant-convo-card {
+    max-width: 100%;
+  }
+
+  .assistant-desktop-spacer {
+    display: none;
+  }
+
+  .assistant-mobile-glasses-wrap {
+    display: block;
+    width: 100%;
+    max-width: 580px;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    -webkit-mask-image: radial-gradient(ellipse at 65% 50%, black 65%, transparent 100%);
+    mask-image: radial-gradient(ellipse at 65% 50%, black 65%, transparent 100%);
+  }
+
+  .assistant-mobile-glasses-img {
+    width: 100%;
+    height: auto;
+    max-height: 380px;
+    object-fit: cover;
+    object-position: 85% center;
+    display: block;
   }
 }
 
-/* Mobile (<= 768px) */
-@media (max-width: 768px) {
-  .nayra-assistant-section {
-    padding: clamp(48px, 7vw, 72px) 0;
+/* Mobile (<= 640px) */
+@media (max-width: 640px) {
+  .assistant-heading {
+    font-size: 2rem;
   }
 
-  .assistant-title {
-    font-size: clamp(1.75rem, 6vw, 2.25rem);
+  .assistant-convo-card {
+    padding: 18px;
   }
 
-  .voice-prompts-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .architecture-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .specs-image-slot {
-    min-height: 220px;
-    padding: 16px;
-  }
-}
-
-/* Reduced Motion */
-@media (prefers-reduced-motion: reduce) {
-  .nayra-assistant-left * {
-    animation: none;
-    transition: none;
+  .assistant-mobile-glasses-img {
+    max-height: 280px;
   }
 }

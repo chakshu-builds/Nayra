@@ -5,12 +5,13 @@ import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import HeroSection from './components/hero/HeroSection'
 import ImpactSection from './components/sections/impact/ImpactSection'
-import VisionSection from './components/sections/VisionSection'
 import NayraBentoSection from './components/sections/bento/NayraBentoSection'
+import NayraEditorialSection from './components/sections/editorial/NayraEditorialSection'
 import NayraAssistantSection from './components/sections/assistant/NayraAssistantSection'
-import AccessibilitySection from './components/sections/AccessibilitySection'
-import TechnologySection from './components/sections/TechnologySection'
+import NayraExperienceSection from './components/sections/experience/NayraExperienceSection'
+import NayraSpecificationsSection from './components/sections/specifications/NayraSpecificationsSection'
 import FinalCtaSection from './components/sections/FinalCtaSection'
+import NayraFAQSection from './components/sections/faq/NayraFAQSection'
 import './App.css'
 
 export default function App() {
@@ -45,7 +46,13 @@ export default function App() {
     // Smooth over any micro-delays (e.g. video decoding or frame streaming)
     gsap.ticker.lagSmoothing(500, 33)
 
+    const handleResize = () => {
+      ScrollTrigger.refresh()
+    }
+    window.addEventListener('resize', handleResize)
+
     return () => {
+      window.removeEventListener('resize', handleResize)
       lenis.destroy()
       gsap.ticker.remove(tickerCallback)
     }
@@ -57,12 +64,19 @@ export default function App() {
       <main id="main-content">
         <HeroSection />
         <ImpactSection />
-        <VisionSection />
         <NayraBentoSection id="meet-nayra" />
+        <NayraEditorialSection
+          id="features"
+          image1Src="/image/NAYRA_Mountain.webp"
+          image1Alt="Person capturing an outdoor mountain experience with NAYRA smart glasses"
+          image2Src="/image/NAYRA_Cafe.webp"
+          image2Alt="Person naturally interacting with NAYRA in a cafe through voice assistance"
+        />
         <NayraAssistantSection id="ai-assistant" />
-        <AccessibilitySection />
-        <TechnologySection />
+        <NayraExperienceSection id="experience" />
+        <NayraSpecificationsSection id="specifications" />
         <FinalCtaSection />
+        <NayraFAQSection id="faq" />
       </main>
       <Footer />
     </div>

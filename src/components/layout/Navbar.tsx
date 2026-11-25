@@ -4,9 +4,10 @@ import './Navbar.css'
 
 const NAV_LINKS: NavLink[] = [
   { label: 'Explore', href: '#impact' },
-  { label: 'Technology', href: '#technology' },
-  { label: 'Experience', href: '#meet-nayra' },
-  { label: 'Specifications', href: '#accessibility' },
+  { label: 'Features', href: '#features' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Specifications', href: '#specifications' },
+  { label: 'FAQ', href: '#faq' },
 ]
 
 export default function Navbar() {
@@ -57,7 +58,7 @@ export default function Navbar() {
         aria-label="Main navigation"
       >
         <div className="navbar__container">
-          {/* Left: Brand Wordmark */}
+          {/* Left: Brand Logo */}
           <div className="navbar__left">
             <a
               href="#hero"
@@ -65,7 +66,11 @@ export default function Navbar() {
               onClick={(e) => handleNavClick(e, '#hero')}
               aria-label="NAYRA Home"
             >
-              NAYRA<span className="navbar__brand-dot">.</span>
+              <img
+                src="/NAYRA_LOGO_OFFWHITE.svg"
+                alt="NAYRA"
+                className="navbar__logo-img"
+              />
             </a>
           </div>
 
@@ -84,16 +89,8 @@ export default function Navbar() {
             ))}
           </ul>
 
-          {/* Right: Primary Action CTA & Mobile Hamburger */}
+          {/* Right: Mobile Hamburger */}
           <div className="navbar__right">
-            <a
-              href="#vision"
-              className="navbar__cta-btn"
-              onClick={(e) => handleNavClick(e, '#vision')}
-            >
-              Get Early Access
-            </a>
-
             {/* Mobile Menu Toggle Button */}
             <button
               type="button"
@@ -128,17 +125,6 @@ export default function Navbar() {
                 </li>
               ))}
             </ul>
-
-            <div className="navbar__mobile-action">
-              <a
-                href="#vision"
-                className="btn btn--primary"
-                onClick={(e) => handleNavClick(e, '#vision')}
-                style={{ width: '100%', justifyContent: 'center' }}
-              >
-                Get Early Access
-              </a>
-            </div>
           </div>
         </div>
       </nav>

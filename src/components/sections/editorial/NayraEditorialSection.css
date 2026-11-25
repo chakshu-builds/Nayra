@@ -1,0 +1,199 @@
+/* ==========================================================================
+   NAYRA — PREMIUM EDITORIAL LIFESTYLE FEATURE SECTION
+   Architecture:
+     - Full-width dark midnight background (#0B0B0F)
+     - 4-Column Desktop Editorial Layout:
+         Col 1 (Left): Built-In Storage Text (top-aligned)
+         Col 2 (Center-Left): Tall Portrait Lifestyle Image 1 (aspect-ratio 9/14)
+         Col 3 (Center-Right): Tall Portrait Lifestyle Image 2 (aspect-ratio 9/14)
+         Col 4 (Right): Intelligent Assistance Text (bottom-aligned)
+     - Mobile (<= 991px): 2 Content Groups in vertical sequence:
+         Group 1: Storage Text + Image 1
+         Group 2: Assistance Text + Image 2
+     - Zero cards, zero borders, zero buttons
+   ========================================================================== */
+
+.nayra-editorial-section {
+  position: relative;
+  width: 100%;
+  background-color: var(--color-midnight, #0B0B0F);
+  color: var(--color-soft-white, #F4F7FA);
+  padding: clamp(80px, 9vw, 140px) 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-top: 1px solid rgba(139, 92, 246, 0.08);
+}
+
+.nayra-editorial-container {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 56px);
+  box-sizing: border-box;
+}
+
+/* ─── 4-Column Desktop Editorial Grid ─── */
+.editorial-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(260px, 1.15fr) minmax(260px, 1.15fr) minmax(220px, 1fr);
+  gap: clamp(20px, 2.5vw, 40px);
+  align-items: stretch;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ─── Columns ─── */
+.editorial-col {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Col 1: Left Text Block (Aligned Near Top) */
+.editorial-col--text-left {
+  justify-content: flex-start;
+  padding-top: clamp(12px, 2vw, 24px);
+}
+
+/* Col 4: Right Text Block (Aligned Near Bottom) */
+.editorial-col--text-right {
+  justify-content: flex-end;
+  padding-bottom: clamp(12px, 2vw, 28px);
+}
+
+/* ─── Typography (No Card Wrappers, Clean Editorial Spacing) ─── */
+.editorial-text-wrap {
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+}
+
+.editorial-heading {
+  font-family: var(--font-heading, 'Sora', system-ui, sans-serif);
+  font-size: clamp(2rem, 2.6vw, 2.75rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: var(--color-soft-white, #F4F7FA);
+  margin: 0;
+}
+
+.editorial-accent {
+  background: linear-gradient(135deg, #E0D7FE 0%, #C4B5FD 45%, #A78BFA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline;
+}
+
+.editorial-paragraph {
+  font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+  font-size: clamp(0.9375rem, 1.05vw, 1.0625rem);
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(244, 247, 250, 0.72);
+  margin: clamp(14px, 1.6vw, 20px) 0 0;
+  text-rendering: optimizeLegibility;
+}
+
+/* ─── Middle 2 Columns: Tall Portrait Lifestyle Images ─── */
+.editorial-col--media-1,
+.editorial-col--media-2 {
+  justify-content: center;
+}
+
+.editorial-image-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 14;
+  min-height: clamp(380px, 48vh, 560px);
+  border-radius: 24px;
+  overflow: hidden;
+  background-color: #121019;
+  box-sizing: border-box;
+  transition: transform 0.4s var(--ease-luxury, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.editorial-image-frame:hover {
+  transform: translateY(-2px);
+}
+
+.editorial-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.6s var(--ease-luxury, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.editorial-image-frame:hover .editorial-img {
+  transform: scale(1.025);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   RESPONSIVE DESIGN: 2 Content Groups on Mobile & Tablet
+   Group 1: Storage Text + Image 1
+   Group 2: Assistance Text + Image 2
+   ══════════════════════════════════════════════════════════════════ */
+@media (max-width: 991px) {
+  .nayra-editorial-section {
+    padding: clamp(60px, 8vw, 90px) 0;
+  }
+
+  .editorial-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Group 1: Storage text + Image 1 */
+  .editorial-col--text-left {
+    order: 1;
+    padding-top: 0;
+    margin-bottom: 24px;
+  }
+
+  .editorial-col--media-1 {
+    order: 2;
+    margin-bottom: clamp(48px, 7vw, 64px);
+  }
+
+  /* Group 2: Assistance text + Image 2 */
+  .editorial-col--text-right {
+    order: 3;
+    padding-bottom: 0;
+    margin-bottom: 24px;
+  }
+
+  .editorial-col--media-2 {
+    order: 4;
+  }
+
+  .editorial-text-wrap {
+    max-width: 100%;
+  }
+
+  .editorial-image-frame {
+    aspect-ratio: 9 / 12;
+    min-height: 360px;
+    max-height: 520px;
+    border-radius: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .editorial-heading {
+    font-size: 1.85rem;
+  }
+
+  .editorial-paragraph {
+    font-size: 0.9375rem;
+  }
+
+  .editorial-image-frame {
+    aspect-ratio: 9 / 13;
+    min-height: 320px;
+  }
+}

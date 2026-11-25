@@ -15,12 +15,12 @@ export interface BentoImageConfig {
   powerArchitecture: string
 }
 
-export const BENTO_IMAGE_CONFIG: BentoImageConfig = {
-  nayraHero: '/bento/nayra-glasses-render.svg',
-  rv1106Processor: '/bento/rv1106-chip-render.svg',
-  dualCameras: '/bento/dual-cameras-render.svg',
-  openEarAudio: '/bento/open-ear-audio-render.svg',
-  powerArchitecture: '/bento/power-architecture-render.svg',
+const BENTO_IMAGE_CONFIG: BentoImageConfig = {
+  nayraHero: '/image/NAYRA_Transparent_Temples.webp',
+  rv1106Processor: '/image/image copy.png',
+  dualCameras: '/image/NAYRA_Camera_Lavender.webp',
+  openEarAudio: '/image/NAYRA_Open_Ear_Audio.webp',
+  powerArchitecture: '/image/NAYRA_Power_Architecture.webp',
 }
 
 export interface BentoCardData {
@@ -36,7 +36,7 @@ export interface BentoCardData {
     }>
   }
   chipCard: {
-    badge: string
+    badge?: string
     title: string
     description: string
     imageAlt: string
@@ -74,31 +74,24 @@ const DEFAULT_BENTO_DATA: BentoCardData = {
     ],
   },
   chipCard: {
-    badge: 'EDGE AI NPU',
     title: 'Powered by Rockchip RV1106',
-    description:
-      'An edge AI processing core designed for lightweight local intelligence, working alongside connected AI services for advanced capabilities.',
+    description: 'Edge AI Processor for real-time, on-device AI.',
     imageAlt: 'Rockchip RV1106 processor',
-    specs: [
-      'Edge AI Processing',
-      'Lightweight On-Device Inference',
-      'Connected AI Architecture',
-    ],
   },
   cameraCard: {
     title: 'Dual Cameras',
-    description: 'See more. Understand your surroundings.',
+    description: 'Capture, understand and interpret your world in real time.',
     imageAlt: 'NAYRA dual cameras',
   },
   audioCard: {
     title: 'Open-Ear Audio',
-    description: 'Clear audio responses while staying aware of your surroundings.',
+    description: 'Directional speakers for clear, immersive sound without blocking your ears.',
     imageAlt: 'NAYRA open-ear audio',
   },
   powerCard: {
-    title: 'Power Architecture',
-    description: 'Compact power management for everyday assistance.',
-    imageAlt: 'NAYRA power architecture',
+    title: 'All-Day Power',
+    description: '1000 mAh battery with efficient power management for 3 – 5 hours of use.',
+    imageAlt: 'NAYRA all-day power architecture',
   },
 }
 
@@ -183,7 +176,6 @@ export default function NayraBentoSection({
       <div className="nayra-bento-container">
         {/* Section Header */}
         <header className="nayra-bento-header">
-          <span className="nayra-bento-eyebrow nayra-bento-reveal">INTELLIGENT SYSTEM ARCHITECTURE</span>
           <h2 className="nayra-bento-heading nayra-bento-reveal">
             Engineered for effortless everyday assistance.
           </h2>
@@ -196,185 +188,164 @@ export default function NayraBentoSection({
         <div ref={gridRef} className="nayra-bento-grid">
           {/* ─── CARD 1: Large Left Hero Card (~40% Width, Spanning Rows 1 & 2) ─── */}
           <article className="bento-item bento-item--glasses">
-            {/* Top: Main hero text */}
+            {/* Top: Header */}
             <div className="bento-glasses-header">
-              <span className="bento-glasses-subtitle">{content.glassesCard.subtitle}</span>
-              <h3 className="bento-glasses-title">{content.glassesCard.title}</h3>
+              <span className="bento-glasses-brand">
+                NAYRA<span className="bento-brand-dot">.</span>
+              </span>
+              <h3 className="bento-glasses-title">
+                More Than <span className="bento-title-accent">Glasses.</span>
+              </h3>
               <p className="bento-glasses-desc">{content.glassesCard.description}</p>
             </div>
 
-            {/* Middle: Directly centered hero image (no nested box or placeholder shapes) */}
-            <div className="bento-hero-media">
-              {images.nayraHero ? (
+            {/* Middle: Glasses Hero Image */}
+            <div className="bento-glasses-media">
+              {images.nayraHero && (
                 <img
                   src={images.nayraHero}
                   alt={content.glassesCard.imageAlt}
-                  className="bento-hero-img"
+                  className="bento-glasses-img"
                   loading="lazy"
                 />
-              ) : null}
+              )}
             </div>
 
-            {/* Bottom: Feature labels at the bottom */}
+            {/* Bottom: Feature Bar with Dividers */}
             <div className="bento-glasses-pillars">
-              <div className="bento-pillar-pill">
-                <span className="pillar-icon-dot">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
-                    <circle cx="12" cy="12" r="3" />
-                  </svg>
-                </span>
+              <div className="bento-pillar-item">
+                <svg className="pillar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
+                  <circle cx="12" cy="13" r="3" />
+                </svg>
                 <span className="pillar-label">See</span>
               </div>
-
-              <div className="bento-pillar-pill">
-                <span className="pillar-icon-dot">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
-                    <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
-                  </svg>
-                </span>
+              <div className="pillar-divider" aria-hidden="true" />
+              <div className="bento-pillar-item">
+                <svg className="pillar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2v20M17 5v14M7 5v14M2 9v6M22 9v6" />
+                </svg>
                 <span className="pillar-label">Hear</span>
               </div>
-
-              <div className="bento-pillar-pill">
-                <span className="pillar-icon-dot">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2a6 6 0 0 0-6 6c0 2.5 1.5 4.5 3 6v2a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-2c1.5-1.5 3-3.5 3-6a6 6 0 0 0-6-6Z" />
-                    <path d="M9 22h6" />
-                  </svg>
-                </span>
+              <div className="pillar-divider" aria-hidden="true" />
+              <div className="bento-pillar-item">
+                <svg className="pillar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2a6 6 0 0 0-6 6c0 2.5 1.5 4.5 3 6v2a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-2c1.5-1.5 3-3.5 3-6a6 6 0 0 0-6-6Z" />
+                  <path d="M9 22h6" />
+                </svg>
                 <span className="pillar-label">Understand</span>
               </div>
-
-              <div className="bento-pillar-pill">
-                <span className="pillar-icon-dot">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 3v18" />
-                    <path d="M3 12h18" />
-                    <circle cx="12" cy="12" r="3" />
-                  </svg>
-                </span>
+              <div className="pillar-divider" aria-hidden="true" />
+              <div className="bento-pillar-item">
+                <svg className="pillar-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="m13 2-8 12h7l-2 8 8-12h-7l2-8z" />
+                </svg>
                 <span className="pillar-label">Assist</span>
               </div>
             </div>
           </article>
 
-          {/* ─── CARD 2: Dual Cameras (Top-Right Slot — Wide Horizontal Card) ─── */}
-          <article className="bento-item bento-item--component bento-item--camera">
-            {/* Left/Top: Icon and Text */}
-            <div className="bento-component-header">
-              <div className="bento-component-icon" aria-hidden="true">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
-                  <circle cx="12" cy="13" r="3" />
-                </svg>
-              </div>
-              <h3 className="bento-component-title">{content.cameraCard.title}</h3>
-              <p className="bento-component-desc">{content.cameraCard.description}</p>
-            </div>
-
-            {/* Right/Media: Integrated media render */}
-            <div className="bento-component-media">
-              {images.dualCameras ? (
-                <img
-                  src={images.dualCameras}
-                  alt={content.cameraCard.imageAlt}
-                  className="bento-component-img"
-                  loading="lazy"
-                />
-              ) : null}
-            </div>
-          </article>
-
-          {/* ─── CARD 3: Open-Ear Audio (Bottom-Right Slot 1 — Equal Column) ─── */}
-          <article className="bento-item bento-item--component bento-item--audio">
-            {/* Top: Icon and Text */}
-            <div className="bento-component-header">
-              <div className="bento-component-icon" aria-hidden="true">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-                </svg>
-              </div>
-              <h3 className="bento-component-title">{content.audioCard.title}</h3>
-              <p className="bento-component-desc">{content.audioCard.description}</p>
-            </div>
-
-            {/* Bottom: Media Area peeking from bottom */}
-            <div className="bento-component-media">
-              {images.openEarAudio ? (
-                <img
-                  src={images.openEarAudio}
-                  alt={content.audioCard.imageAlt}
-                  className="bento-component-img"
-                  loading="lazy"
-                />
-              ) : null}
-            </div>
-          </article>
-
-          {/* ─── CARD 4: Power Architecture (Bottom-Right Slot 2 — Equal Column) ─── */}
-          <article className="bento-item bento-item--component bento-item--power">
-            {/* Top: Icon and Text */}
-            <div className="bento-component-header">
-              <div className="bento-component-icon" aria-hidden="true">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="7" width="16" height="10" rx="2" ry="2" />
-                  <line x1="22" y1="11" x2="22" y2="13" />
-                  <path d="m11 9-3 3h4l-3 3" />
-                </svg>
-              </div>
-              <h3 className="bento-component-title">{content.powerCard.title}</h3>
-              <p className="bento-component-desc">{content.powerCard.description}</p>
-            </div>
-
-            {/* Bottom: Media Area peeking from bottom */}
-            <div className="bento-component-media">
-              {images.powerArchitecture ? (
-                <img
-                  src={images.powerArchitecture}
-                  alt={content.powerCard.imageAlt}
-                  className="bento-component-img"
-                  loading="lazy"
-                />
-              ) : null}
-            </div>
-          </article>
-
-          {/* ─── CARD 5: Powered by Rockchip RV1106 (Bottom Full-Width Banner) ─── */}
+          {/* ─── CARD 2: Powered by Rockchip RV1106 (Top-Right Slot — Wide Card Spanning Top Right) ─── */}
           <article className="bento-item bento-item--chip">
-            {/* Left: Processor text & feature pills */}
+            {/* Left: Content */}
             <div className="bento-chip-content">
-              {content.chipCard.badge && (
-                <span className="bento-chip-badge">{content.chipCard.badge}</span>
-              )}
-              <h3 className="bento-chip-title">{content.chipCard.title}</h3>
+              <div className="bento-chip-icon-box" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="4" y="4" width="16" height="16" rx="2" />
+                  <rect x="9" y="9" width="6" height="6" />
+                  <path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3" />
+                </svg>
+              </div>
+              <h3 className="bento-chip-title">
+                Powered by<br />Rockchip RV1106
+              </h3>
               <p className="bento-chip-desc">{content.chipCard.description}</p>
-              
-              {content.chipCard.specs && (
-                <div className="bento-chip-tags">
-                  {content.chipCard.specs.map((spec, i) => (
-                    <span key={i} className="chip-tag-pill">
-                      <span className="chip-tag-dot" />
-                      {spec}
-                    </span>
-                  ))}
-                </div>
-              )}
             </div>
 
-            {/* Right: Integrated processor chip graphic */}
+            {/* Right: Graphic */}
             <div className="bento-chip-media">
-              {images.rv1106Processor ? (
+              {images.rv1106Processor && (
                 <img
                   src={images.rv1106Processor}
                   alt={content.chipCard.imageAlt}
                   className="bento-chip-img"
                   loading="lazy"
                 />
-              ) : null}
+              )}
+            </div>
+          </article>
+
+          {/* ─── CARD 3: Dual Cameras (Bottom-Right Col 1) ─── */}
+          <article className="bento-item bento-item--sub bento-item--camera">
+            <div className="bento-sub-media">
+              {images.dualCameras && (
+                <img
+                  src={images.dualCameras}
+                  alt={content.cameraCard.imageAlt}
+                  className="bento-sub-img bento-sub-img--camera"
+                  loading="lazy"
+                />
+              )}
+            </div>
+            <div className="bento-sub-footer">
+              <div className="bento-sub-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
+                  <circle cx="12" cy="13" r="3" />
+                </svg>
+              </div>
+              <h3 className="bento-sub-title">{content.cameraCard.title}</h3>
+              <p className="bento-sub-desc">{content.cameraCard.description}</p>
+            </div>
+          </article>
+
+          {/* ─── CARD 4: Open-Ear Audio (Bottom-Right Col 2) ─── */}
+          <article className="bento-item bento-item--sub bento-item--audio">
+            <div className="bento-sub-media">
+              {images.openEarAudio && (
+                <img
+                  src={images.openEarAudio}
+                  alt={content.audioCard.imageAlt}
+                  className="bento-sub-img bento-sub-img--audio"
+                  loading="lazy"
+                />
+              )}
+            </div>
+            <div className="bento-sub-footer">
+              <div className="bento-sub-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                </svg>
+              </div>
+              <h3 className="bento-sub-title">{content.audioCard.title}</h3>
+              <p className="bento-sub-desc">{content.audioCard.description}</p>
+            </div>
+          </article>
+
+          {/* ─── CARD 5: All-Day Power (Bottom-Right Col 3) ─── */}
+          <article className="bento-item bento-item--sub bento-item--power">
+            <div className="bento-sub-media">
+              {images.powerArchitecture && (
+                <img
+                  src={images.powerArchitecture}
+                  alt={content.powerCard.imageAlt}
+                  className="bento-sub-img bento-sub-img--power"
+                  loading="lazy"
+                />
+              )}
+            </div>
+            <div className="bento-sub-footer">
+              <div className="bento-sub-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="7" width="16" height="10" rx="2" ry="2" />
+                  <line x1="22" y1="11" x2="22" y2="13" />
+                  <path d="m11 9-3 3h4l-3 3" />
+                </svg>
+              </div>
+              <h3 className="bento-sub-title">{content.powerCard.title}</h3>
+              <p className="bento-sub-desc">{content.powerCard.description}</p>
             </div>
           </article>
         </div>

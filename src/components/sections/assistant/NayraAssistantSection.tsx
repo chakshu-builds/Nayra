@@ -2,148 +2,62 @@ import { useEffect, useRef } from 'react'
 import { gsap } from '../../../lib/animations'
 import './NayraAssistantSection.css'
 
-export interface VoicePromptItem {
-  query: string
-  context?: string
-}
-
-export interface VoicePromptGroup {
-  wakeWord: string
-  prompts: VoicePromptItem[]
-}
-
-export interface ArchitectureModule {
-  code: string
-  name: string
-  status: string
-  badgeVariant?: 'developed' | 'implemented' | 'pending'
-}
-
-export interface NayraAssistantConfig {
-  title: string
-  coreIdea: string
-  voicePrompts: VoicePromptGroup[]
-  architecture: ArchitectureModule[]
-  devNote: string
-  glassesImage?: string
-  glassesImageAlt?: string
-}
-
-export const DEFAULT_ASSISTANT_CONFIG: NayraAssistantConfig = {
-  title: 'NAYRA — AI-Powered Assistive Smart Glasses',
-  coreIdea:
-    'Gives blind and visually impaired individuals real-time, contextual audio assistance so they can identify objects, read signs, recognize familiar people, and navigate obstacles more independently. It is an integrated assistive vision platform, not just an object detector or OCR reader.',
-  voicePrompts: [
-    {
-      wakeWord: 'Say "Hey NAYRA"',
-      prompts: [
-        {
-          query: 'Who is standing right in front of me?',
-          context: 'Familiar person recognition + relationship context',
-        },
-        {
-          query: 'What obstacle is ahead, and how far is it?',
-          context: 'Object detection, ByteTrack tracking & spatial depth estimation',
-        },
-        {
-          query: 'Read this signboard or label in English or Hindi.',
-          context: 'Hindi & English OCR',
-        },
-      ],
-    },
-    {
-      wakeWord: 'Say "Hey Siri / Google"',
-      prompts: [
-        {
-          query: 'Read my last message and reply with "Sounds good, thanks!"',
-        },
-        {
-          query: 'Remind me about my 3 PM Thursday meeting.',
-        },
-        {
-          query: 'Give me a quick summary of what\'s around me.',
-        },
-      ],
-    },
-  ],
-  architecture: [
-    { code: '01', name: 'Camera Input', status: 'Developed', badgeVariant: 'developed' },
-    { code: '02', name: 'Camera Management', status: 'Developed', badgeVariant: 'developed' },
-    { code: '03', name: 'Object Detection (YOLOv10 ONNX)', status: 'Developed', badgeVariant: 'developed' },
-    { code: '04', name: 'Object Tracking (ByteTrack)', status: 'Developed', badgeVariant: 'developed' },
-    { code: '05', name: 'Spatial Awareness (Depth Estimation)', status: 'Developed', badgeVariant: 'developed' },
-    { code: '06', name: 'Familiar Person Recognition', status: 'Developed', badgeVariant: 'developed' },
-    { code: '06 Extension', name: 'Personal Context Database', status: 'Implemented', badgeVariant: 'implemented' },
-    { code: '07', name: 'Hindi + English OCR', status: 'PoCs complete; integration pending', badgeVariant: 'pending' },
-  ],
-  devNote:
-    'Tested on an NVIDIA RTX 4050 Laptop GPU with ONNX Runtime and CUDA acceleration. Software perception modules are being developed and tested, while full wearable hardware, integrated real-time experience, and user-level safety validation are still in progress.',
-  // Open/blank space reserved for specs image (clean placeholder ready to drop image into later)
-  glassesImage: '',
-  glassesImageAlt: 'NAYRA Assistive Smart Glasses hardware specifications',
-}
-
-interface NayraAssistantSectionProps {
+export interface NayraAssistantProps {
   id?: string
-  config?: Partial<NayraAssistantConfig>
+  imageSrc?: string
 }
 
 export default function NayraAssistantSection({
   id = 'ai-assistant',
-  config = {},
-}: NayraAssistantSectionProps) {
+  imageSrc = '/image/NAYRA_Purple_Gradient_Glasses.webp',
+}: NayraAssistantProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
-  const slotRef = useRef<HTMLDivElement>(null)
-
-  const data: NayraAssistantConfig = {
-    ...DEFAULT_ASSISTANT_CONFIG,
-    ...config,
-  }
+  const visualRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const section = sectionRef.current
     const content = contentRef.current
+    const visual = visualRef.current
     if (!section || !content) return
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReducedMotion) return
 
     const reveals = content.querySelectorAll('.asst-reveal')
-    const slotEl = slotRef.current
 
     const ctx = gsap.context(() => {
       if (reveals.length > 0) {
         gsap.fromTo(
           reveals,
-          { opacity: 0, y: 20 },
+          { opacity: 0, y: 22 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.7,
-            stagger: 0.08,
+            duration: 0.75,
+            stagger: 0.1,
             ease: 'power2.out',
             scrollTrigger: {
               trigger: section,
-              start: 'top 82%',
+              start: 'top 78%',
               toggleActions: 'play none none reverse',
             },
           }
         )
       }
 
-      if (slotEl) {
+      if (visual) {
         gsap.fromTo(
-          slotEl,
-          { opacity: 0, scale: 0.98 },
+          visual,
+          { opacity: 0, x: 28 },
           {
             opacity: 1,
-            scale: 1,
-            duration: 0.8,
+            x: 0,
+            duration: 0.85,
             ease: 'power2.out',
             scrollTrigger: {
               trigger: section,
-              start: 'top 80%',
+              start: 'top 75%',
               toggleActions: 'play none none reverse',
             },
           }
@@ -155,99 +69,109 @@ export default function NayraAssistantSection({
   }, [])
 
   return (
-    <section ref={sectionRef} className="nayra-assistant-section" id={id} aria-label="NAYRA Assistive Smart Glasses">
+    <section ref={sectionRef} className="nayra-assistant-section" id={id} aria-label="NAYRA Assistant">
+      {/* ─── Full-Bleed Product Gradient Background Layer ─── */}
+      <div className="assistant-bg-layer" aria-hidden="true">
+        <img
+          src={imageSrc}
+          alt=""
+          className="assistant-bg-img"
+        />
+        <div className="assistant-bg-overlay" />
+      </div>
+
       <div className="nayra-assistant-container">
         <div className="nayra-assistant-grid">
-          {/* ─── LEFT: Content & Information ─── */}
-          <div ref={contentRef} className="nayra-assistant-left">
-            {/* Header: Title & Core Idea */}
-            <header className="assistant-header asst-reveal">
-              <span className="assistant-badge">ASSISTIVE VISION INTELLIGENCE</span>
-              <h2 className="assistant-title">{data.title}</h2>
-              <p className="assistant-core-idea">{data.coreIdea}</p>
-            </header>
+          {/* ─── LEFT: Typography & Conversation Demonstration ─── */}
+          <div ref={contentRef} className="assistant-content-column">
+            {/* Small Eyebrow */}
+            <span className="assistant-eyebrow asst-reveal">NAYRA ASSISTANT</span>
 
-            {/* Sample Voice Prompts */}
-            <div className="assistant-block asst-reveal">
-              <h3 className="assistant-block-title">Sample Voice Prompts</h3>
-              <div className="voice-prompts-grid">
-                {data.voicePrompts.map((group, idx) => (
-                  <div key={idx} className="voice-prompt-group">
-                    <span className="wake-word-tag">{group.wakeWord}</span>
-                    <ul className="prompt-items-list">
-                      {group.prompts.map((item, pIdx) => (
-                        <li key={pIdx} className="prompt-item">
-                          <span className="prompt-quote">&ldquo;</span>
-                          <div className="prompt-body">
-                            <span className="prompt-query">{item.query}</span>
-                            {item.context && (
-                              <span className="prompt-context">({item.context})</span>
-                            )}
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* Main Heading */}
+            <h2 className="assistant-heading asst-reveal">
+              A Smarter Way<br />
+              <span className="assistant-heading-highlight">to See the World.</span>
+            </h2>
 
-            {/* Current Technical Architecture & Status */}
-            <div className="assistant-block asst-reveal">
-              <h3 className="assistant-block-title">Current Technical Architecture &amp; Status</h3>
-              <div className="architecture-grid">
-                {data.architecture.map((item, idx) => (
-                  <div key={idx} className="arch-item">
-                    <span className="arch-code">{item.code}</span>
-                    <span className="arch-name">{item.name}</span>
-                    <span className={`arch-status-badge status--${item.badgeVariant || 'developed'}`}>
-                      <span className="arch-dot" />
-                      {item.status}
+            {/* Description */}
+            <p className="assistant-description asst-reveal">
+              Your on-glasses AI companion that sees, hears, understands and assists you in real time.
+            </p>
+
+            {/* Premium Conversation Demonstration Panel */}
+            <div className="assistant-convo-card asst-reveal">
+              {/* Message 1: YOU */}
+              <div className="convo-msg convo-msg--user">
+                <div className="convo-msg-header">
+                  <div className="convo-sender">
+                    <span className="convo-sender-icon convo-sender-icon--user">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                      </svg>
                     </span>
+                    <span className="convo-sender-tag">YOU</span>
                   </div>
-                ))}
-              </div>
-            </div>
 
-            {/* Dev & Hardware Note */}
-            <div className="dev-hardware-note asst-reveal" role="note">
-              <div className="note-header">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                  <circle cx="12" cy="12" r="10" />
-                  <line x1="12" y1="16" x2="12" y2="12" />
-                  <line x1="12" y1="8" x2="12.01" y2="8" />
-                </svg>
-                <span>Dev &amp; Hardware Note</span>
+                  {/* Subtle Audio Waveform Aligned to Right */}
+                  <div className="convo-waveform" aria-label="Voice input active">
+                    <span className="wave-bar wave-bar-1" />
+                    <span className="wave-bar wave-bar-2" />
+                    <span className="wave-bar wave-bar-3" />
+                    <span className="wave-bar wave-bar-4" />
+                    <span className="wave-bar wave-bar-5" />
+                    <span className="wave-bar wave-bar-6" />
+                  </div>
+                </div>
+
+                <p className="convo-msg-text convo-msg-text--user">
+                  &ldquo;Hey NAYRA, what am I looking at?&rdquo;
+                </p>
               </div>
-              <p className="note-text">{data.devNote}</p>
+
+              {/* Message 2: NAYRA Reply */}
+              <div className="convo-msg convo-msg--assistant">
+                <div className="convo-msg-header">
+                  <div className="convo-sender">
+                    <span className="convo-sender-icon convo-sender-icon--assistant">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z" />
+                      </svg>
+                    </span>
+                    <span className="convo-sender-tag convo-sender-tag--assistant">NAYRA</span>
+                  </div>
+
+                  <div className="convo-hud-badge">
+                    <span className="hud-pulse-dot" />
+                    <span className="hud-label">Visual Perception</span>
+                  </div>
+                </div>
+
+                <div className="convo-msg-text convo-msg-text--assistant">
+                  <p className="convo-primary-line">
+                    &ldquo;You&rsquo;re looking at a pedestrian crossing.
+                  </p>
+                  <p className="convo-secondary-line">
+                    The signal is currently <span className="convo-signal-alert">red</span>.&rdquo;
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* ─── RIGHT: Open/Blank Space Reserved for Specs Image ─── */}
-          <div ref={slotRef} className="nayra-assistant-right">
-            <div className="specs-image-slot">
-              {data.glassesImage ? (
-                <img
-                  src={data.glassesImage}
-                  alt={data.glassesImageAlt || 'NAYRA Assistive Smart Glasses'}
-                  className="specs-rendered-img"
-                  loading="lazy"
-                />
-              ) : (
-                /* Clean Placeholder Slot Ready to Drop Image Asset Into Later */
-                <div className="specs-slot-placeholder" aria-label="Reserved specs image placeholder">
-                  <div className="placeholder-content">
-                    <div className="placeholder-icon-circle">
-                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
-                        <circle cx="12" cy="12" r="3" />
-                      </svg>
-                    </div>
-                    <span className="placeholder-title">Specs Image Slot</span>
-                    <span className="placeholder-desc">Open space reserved for NAYRA glasses / hardware visual</span>
-                  </div>
-                </div>
-              )}
+          {/* ─── RIGHT: NAYRA Glasses Visual Column ─── */}
+          <div ref={visualRef} className="assistant-visual-column asst-reveal">
+            {/* Desktop spacer: preserves right-column dimension and lets the background glasses shine through */}
+            <div className="assistant-desktop-spacer" aria-hidden="true" />
+
+            {/* Mobile/Tablet: displays glasses prominently below the conversation */}
+            <div className="assistant-mobile-glasses-wrap">
+              <img
+                src={imageSrc}
+                alt="NAYRA AI smart glasses with purple gradient"
+                className="assistant-mobile-glasses-img"
+                loading="lazy"
+              />
             </div>
           </div>
         </div>

@@ -167,13 +167,13 @@ export const HeroStoryOverlays = forwardRef<HeroStoryOverlaysHandle>(function He
         }
       }
 
-      // ─── 4. Final Product Reveal: NAYRA (Top-center, Progress 0.72 -> 1.00) ───
+      // ─── 4. Final Product Reveal: NAYRA (Top-center, Progress 0.70 -> 1.00) ───
       if (finalBlockRef.current) {
-        if (p < 0.72) {
+        if (p < 0.70) {
           finalBlockRef.current.style.opacity = '0'
           finalBlockRef.current.style.visibility = 'hidden'
-        } else if (p >= 0.72 && p < 0.88) {
-          const t = (p - 0.72) / 0.16
+        } else if (p >= 0.70 && p < 0.88) {
+          const t = (p - 0.70) / 0.18
           finalBlockRef.current.style.opacity = String(t)
           finalBlockRef.current.style.transform = `translate(-50%, calc(-50% + ${16 * (1 - t)}px))`
           finalBlockRef.current.style.visibility = 'visible'

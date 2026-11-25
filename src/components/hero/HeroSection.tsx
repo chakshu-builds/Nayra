@@ -57,8 +57,8 @@ export default function HeroSection() {
 
     if (prefersReducedMotion) return
 
-    // 2. Full-Screen Pinned Scroll Animation (300vh scroll distance for spacious storytelling pacing)
-    const scrollDistance = isMobile ? window.innerHeight * 2.4 : window.innerHeight * 3.0
+    // 2. Full-Screen Pinned Scroll Animation (tightened scroll distance to eliminate dead scroll gap)
+    const scrollDistance = isMobile ? window.innerHeight * 1.7 : window.innerHeight * 2.1
 
     const heroTrigger = ScrollTrigger.create({
       trigger: container,

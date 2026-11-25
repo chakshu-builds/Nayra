@@ -34,6 +34,35 @@ export function VideoDetailModal({ card, cards, onClose, onNavigate }: VideoDeta
     }
   }, [hasNext, cards, currentIndex, onNavigate])
 
+  // Toggle Play/Pause
+  const togglePlayPause = useCallback(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    if (video.paused) {
+      video.play().then(() => setIsPlaying(true)).catch(() => {})
+    } else {
+      video.pause()
+      setIsPlaying(false)
+    }
+  }, [])
+
+  // Toggle Audio Mute
+  const toggleMute = useCallback((e?: React.MouseEvent) => {
+    e?.stopPropagation()
+    const video = videoRef.current
+    if (!video) return
+    if (video.muted) {
+      video.muted = false
+      video.volume = 1.0
+      setIsMuted(false)
+      video.play().then(() => setIsPlaying(true)).catch(() => {})
+    } else {
+      video.muted = true
+      setIsMuted(true)
+    }
+  }, [])
+
   // Keyboard navigation & escape listener
   useEffect(() => {
     if (!card) return
@@ -46,7 +75,7 @@ export function VideoDetailModal({ card, cards, onClose, onNavigate }: VideoDeta
       } else if (e.key === 'ArrowRight') {
         handleNext()
       } else if (e.key === 'm' || e.key === 'M') {
-        setIsMuted((prev) => !prev)
+        toggleMute()
       } else if (e.key === ' ') {
         e.preventDefault()
         togglePlayPause()
@@ -55,7 +84,7 @@ export function VideoDetailModal({ card, cards, onClose, onNavigate }: VideoDeta
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [card, onClose, handlePrev, handleNext])
+  }, [card, onClose, handlePrev, handleNext, togglePlayPause, toggleMute])
 
   // Scroll lock when active
   useEffect(() => {
@@ -74,43 +103,42 @@ export function VideoDetailModal({ card, cards, onClose, onNavigate }: VideoDeta
     const video = videoRef.current
     if (!video || !card) return
 
-    video.currentTime = 0
+    // Prefer unmuted audio playback on user click
     video.muted = false
     video.volume = 1.0
 
-    video
-      .play()
-      .then(() => {
-        setIsPlaying(true)
-        setIsMuted(false)
-      })
-      .catch(() => {
-        // Fallback to muted if unmuted autoplay is blocked by browser policy
-        video.muted = true
-        setIsMuted(true)
-        video.play().then(() => setIsPlaying(true)).catch(() => {})
-      })
+    const playPromise = video.play()
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          setIsPlaying(true)
+          setIsMuted(false)
+        })
+        .catch(() => {
+          // If unmuted autoplay is disallowed by browser policy, fallback smoothly to muted
+          video.muted = true
+          setIsMuted(true)
+          video.play().then(() => setIsPlaying(true)).catch(() => {})
+        })
+    }
   }, [card])
 
   // Typewriter effect execution floating in the air
   useEffect(() => {
-    if (!card) {
-      setDisplayedText('')
-      setIsTypingComplete(false)
-      return
-    }
+    if (!card) return
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const narrative = card.narrative
 
     if (prefersReducedMotion) {
-      setDisplayedText(narrative)
-      setIsTypingComplete(true)
-      return
+      typingTimeoutRef.current = window.setTimeout(() => {
+        setDisplayedText(narrative)
+        setIsTypingComplete(true)
+      }, 0)
+      return () => {
+        if (typingTimeoutRef.current) window.clearTimeout(typingTimeoutRef.current)
+      }
     }
-
-    setDisplayedText('')
-    setIsTypingComplete(false)
 
     let charIndex = 0
 
@@ -141,29 +169,6 @@ export function VideoDetailModal({ card, cards, onClose, onNavigate }: VideoDeta
       }
     }
   }, [card])
-
-  // Toggle Play/Pause
-  const togglePlayPause = () => {
-    const video = videoRef.current
-    if (!video) return
-
-    if (video.paused) {
-      video.play().then(() => setIsPlaying(true)).catch(() => {})
-    } else {
-      video.pause()
-      setIsPlaying(false)
-    }
-  }
-
-  // Toggle Audio Mute
-  const toggleMute = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    const video = videoRef.current
-    if (!video) return
-    const nextMuted = !video.muted
-    video.muted = nextMuted
-    setIsMuted(nextMuted)
-  }
 
   if (!card) return null
 
@@ -266,17 +271,29 @@ export function VideoDetailModal({ card, cards, onClose, onNavigate }: VideoDeta
         {/* VIDEO IN CENTER */}
         <div className="cinema-video-portal" onClick={togglePlayPause}>
           <video
-            key={card.id}
             ref={videoRef}
+            src={videoSource}
+            poster={card.posterSrc}
             className="cinema-video-element"
             playsInline
-            autoPlay
             loop
             preload="auto"
             aria-label={card.alt}
-          >
-            <source src={videoSource} type="video/mp4" />
-          </video>
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
+            onVolumeChange={() => {
+              if (videoRef.current) {
+                setIsMuted(videoRef.current.muted)
+              }
+            }}
+            onEnded={() => {
+              const video = videoRef.current
+              if (video) {
+                video.currentTime = 0
+                video.play().catch(() => {})
+              }
+            }}
+          />
 
           {/* Minimal Play/Pause Floating Hint on Pause */}
           {!isPlaying && (

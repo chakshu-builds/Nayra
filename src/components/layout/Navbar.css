@@ -55,11 +55,6 @@
 .navbar__brand {
   display: inline-flex;
   align-items: center;
-  font-family: var(--font-heading);
-  font-size: 1.1875rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: var(--color-soft-white);
   text-decoration: none;
   transition: opacity var(--duration-fast) ease;
 }
@@ -68,9 +63,11 @@
   opacity: 0.85;
 }
 
-.navbar__brand-dot {
-  color: var(--color-royal-purple);
-  margin-left: 2px;
+.navbar__logo-img {
+  height: clamp(30px, 3.2vw, 38px);
+  width: auto;
+  display: block;
+  object-fit: contain;
 }
 
 /* Center: Mathematical Centering of Menu */
@@ -255,5 +252,16 @@
 
   .navbar__mobile-overlay {
     display: block;
+  }
+}
+
+@media (max-width: 640px) {
+  .navbar__container {
+    height: 70px;
+    padding: 0 20px;
+  }
+  .navbar__mobile-overlay {
+    top: 70px;
+    height: calc(100vh - 70px);
   }
 }

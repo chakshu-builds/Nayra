@@ -63,6 +63,9 @@ html {
   background-color: var(--color-midnight);
   color: var(--color-soft-white);
   scroll-behavior: auto; /* Handled smoothly by Lenis */
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -74,6 +77,23 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
+  max-width: 100%;
+  position: relative;
+}
+
+#root,
+.app-shell {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Ensure anchor / in-page links do not hide beneath fixed navbar */
+section[id],
+header[id],
+div[id] {
+  scroll-margin-top: 80px;
 }
 
 /* Lenis Smooth Scroll Integration */

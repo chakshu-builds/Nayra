@@ -1,4 +1,4 @@
-import { forwardRef, useRef, useEffect, useState } from 'react'
+import { forwardRef, useRef, useEffect } from 'react'
 import type { BentoImpactCardItem } from '../../../types'
 import './BentoCard.css'
 
@@ -16,71 +16,36 @@ export const BentoCard = forwardRef<HTMLElement, BentoCardProps>(
     const cardRef = useRef<HTMLElement | null>(null)
     const posterRef = useRef<HTMLImageElement | null>(null)
 
-    // Lazy attachment: video element & sources are NOT mounted into DOM until within 200px of viewport
-    const [isSourcesLoaded, setIsSourcesLoaded] = useState(false)
-
-    // 1. Proximity Observer: only attach video URL when card approaches viewport (200px margin)
+    // 1. Viewport-aware continuous playback observer
+    // Generous 200px vertical margin ensures video stays buffered and playing smoothly without micro-stutters during scrolling
     useEffect(() => {
       const container = cardRef.current
-      if (!container) return
+      const video = videoRef.current
+      if (!container || !video) return
 
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
       if (prefersReducedMotion) return
 
-      const proximityObserver = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) {
-            if (entry.isIntersecting) {
-              setIsSourcesLoaded(true)
-              proximityObserver.disconnect()
-              break
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting && !isModalOpen) {
+            video.play().catch(() => {
+              // Autoplay policy or low-power fallback
+            })
+          } else {
+            if (!video.paused) {
+              video.pause()
             }
           }
         },
-        { rootMargin: '200px 0px' }
+        { rootMargin: '200px 0px', threshold: 0.05 }
       )
 
-      proximityObserver.observe(container)
-      return () => proximityObserver.disconnect()
-    }, [])
+      observer.observe(container)
+      return () => observer.disconnect()
+    }, [isModalOpen])
 
-    // 2. Playback Observer: autoplay only when sufficiently visible (>=25%), pause immediately when leaving (<15%)
-    // Operates via direct DOM calls with ZERO React state updates during scrolling to ensure smooth 60fps
-    useEffect(() => {
-      const container = cardRef.current
-      if (!container || !isSourcesLoaded) return
-
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      if (prefersReducedMotion) return
-
-      const playbackObserver = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) {
-            const video = videoRef.current
-            if (!video) continue
-
-            if (entry.isIntersecting && entry.intersectionRatio >= 0.25 && !isModalOpen) {
-              const playPromise = video.play()
-              if (playPromise !== undefined) {
-                playPromise.catch(() => {
-                  // Autoplay blocked by browser policy or low-power mode; poster remains visible
-                })
-              }
-            } else if (entry.intersectionRatio < 0.15 || !entry.isIntersecting) {
-              if (!video.paused) {
-                video.pause()
-              }
-            }
-          }
-        },
-        { threshold: [0, 0.15, 0.25] }
-      )
-
-      playbackObserver.observe(container)
-      return () => playbackObserver.disconnect()
-    }, [isSourcesLoaded, isModalOpen])
-
-    // 3. Pause video when the detailed modal is open or when browser tab is hidden
+    // 2. Pause video when detailed modal is open or when browser tab is hidden
     useEffect(() => {
       const video = videoRef.current
       if (!video) return
@@ -92,6 +57,8 @@ export const BentoCard = forwardRef<HTMLElement, BentoCardProps>(
       const handleVisibilityChange = () => {
         if (document.hidden && !video.paused) {
           video.pause()
+        } else if (!document.hidden && !isModalOpen) {
+          video.play().catch(() => {})
         }
       }
 
@@ -122,47 +89,50 @@ export const BentoCard = forwardRef<HTMLElement, BentoCardProps>(
         }}
         aria-label={`${card.title} - Click to expand demonstration`}
       >
-        {/* Lightweight WebP Poster (Always loaded first, reserves fixed 3:4 aspect ratio to prevent CLS) */}
+        {/* Full-Bleed Hardware-Accelerated Video (Continuous 60fps Loop) */}
+        <video
+          ref={videoRef}
+          className="bento-card-video"
+          autoPlay
+          loop
+          muted
+          playsInline
+          disablePictureInPicture
+          disableRemotePlayback
+          preload="auto"
+          aria-label={card.alt}
+          onPlaying={() => {
+            if (posterRef.current) {
+              posterRef.current.style.opacity = '0'
+              posterRef.current.style.pointerEvents = 'none'
+            }
+          }}
+        >
+          {/* Hardware-accelerated MP4 (H.264 faststart) first for guaranteed zero-CPU 60fps decoding */}
+          <source
+            src={card.sources.mp4_720}
+            type="video/mp4"
+            media="(min-width: 681px)"
+          />
+          <source
+            src={card.sources.mp4_540}
+            type="video/mp4"
+            media="(max-width: 680px)"
+          />
+          {/* WebM fallback */}
+          <source src={card.sources.webm_720} type="video/webm" />
+          <source src={card.sources.webm_540} type="video/webm" />
+        </video>
+
+        {/* Lightweight WebP Poster (Zero Layout Shift, gracefully fades out on play) */}
         <img
           ref={posterRef}
           src={card.posterSrc}
           alt={card.alt}
           className="bento-card-poster"
-          loading="lazy"
+          loading="eager"
           decoding="async"
         />
-
-        {/* Video element: only mounted when card approaches within 200px */}
-        {isSourcesLoaded && (
-          <video
-            ref={videoRef}
-            className="bento-card-video"
-            playsInline
-            muted
-            loop
-            preload="none"
-            aria-label={card.alt}
-            onPlaying={() => posterRef.current?.classList.add('bento-card-poster--hidden')}
-            onPause={() => posterRef.current?.classList.remove('bento-card-poster--hidden')}
-          >
-            {/* Mobile (<= 680px) VP9 WebM */}
-            <source
-              src={card.sources.webm_540}
-              type="video/webm"
-              media="(max-width: 680px)"
-            />
-            {/* Mobile (<= 680px) H.264 MP4 */}
-            <source
-              src={card.sources.mp4_540}
-              type="video/mp4"
-              media="(max-width: 680px)"
-            />
-            {/* Desktop (> 680px) VP9 WebM */}
-            <source src={card.sources.webm_720} type="video/webm" />
-            {/* Desktop (> 680px) H.264 MP4 */}
-            <source src={card.sources.mp4_720} type="video/mp4" />
-          </video>
-        )}
 
         {/* Cinematic gradient scrim for readable text contrast */}
         <div className="bento-card-scrim" />
